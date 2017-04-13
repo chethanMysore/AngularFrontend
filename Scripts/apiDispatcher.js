@@ -29,7 +29,7 @@ app.factory('apiDispatcher',[$q,$http,'Upload',function($q,$http,Upload){
 		return defered.promise;
 	}
 	
-	onApiCall: function(uri,file){
+	onUpload: function(uri,file){
 		Upload.upload({		
 			url: uri,
 			file: file,
@@ -41,4 +41,29 @@ app.factory('apiDispatcher',[$q,$http,'Upload',function($q,$http,Upload){
 		});
 		return defered.promise;
 	}
+return{
+	getAll: function(uri){
+		return onApiCall(uri,'GET');
+	},
+	getById : function(uri){
+		return onApiCall(uri,'GET');
+			
+			
+	},
+	postData: function(uri,data){
+		return onApiCall(uri,'POST',data);
+	},
+	deleteById : function(uri){
+		return onApiCall(uri,'DELETE');
+			
+			
+	},
+	uploadFile: function(uri,file){
+		return onApiCall(uri,file);
+	},
+	update : function(uri){
+		return onApiCall(uri,'PUT');
+			
+	}
+}
 }]);
