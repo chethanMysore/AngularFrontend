@@ -7,6 +7,7 @@ app.factory('loginService',function($cookieStore,$cookies,$rootScope,apiDispatch
 			$http({
 				method: 'POST',
 				url: uri,
+				data: data,
 				headers: {'content-type':'application/x-www-form-urlencoded'}
 			}).then(function(res){
 				$cookieStore.put('access_token',res.data.access_token);
