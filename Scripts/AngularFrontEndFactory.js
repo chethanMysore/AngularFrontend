@@ -6,8 +6,7 @@ app.factory('crudService', function (apiFactory) {
         		return res;
         	},function(err){
         		return err;
-        	});
-        	
+        	});      	
         }
     }
 });
