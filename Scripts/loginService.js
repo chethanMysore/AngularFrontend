@@ -1,8 +1,8 @@
-var app = angular.module('AngularModule',[]);
+var app = angular.module('AngularModule', ['ngCookies', 'ngRoute']);
 
 app.factory('loginService',function($cookieStore,$cookies,$rootScope,apiDispatcher,$http,$q){
 	var deferred = $q.defer();
-		login: function(uri){
+		var login = function(uri){
 			var data = "&grant_type=password" + "&username=demo@ecolab.com" + "&password=ecolab123" + "&client_id=EcoIceCloud" + "client_secret=ramendra";
 			$http({
 				method: 'POST',

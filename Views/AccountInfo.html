@@ -1,0 +1,59 @@
+﻿<center>
+    <div ng-view class="content">
+        <h2></h2>
+        <p>
+
+            <label>ACCOUNT ID : {{RetrievedAccount.id}}</label>
+            <br />
+            <br />
+            <label>ACCOUNT ID : {{RetrievedAccount.Corporate_Name}}</label>
+            <br />
+            <label>ACCOUNT ID : {{RetrievedAccount.Corporate_ShortName}}</label>
+            <br />
+            <label>ACCOUNT ID : {{RetrievedAccount.Corporate_TradeName}}</label>
+            <br />
+            <label>ACCOUNT ID : {{RetrievedAccount.Corporate_Address_Street}}</label>
+            <br />
+            <label>ACCOUNT ID : {{RetrievedAccount.Corporate_Address_City}}</label>
+            <br />
+            <label>ACCOUNT ID : {{RetrievedAccount.Corporate_Address_State}}</label>
+            <br />
+            <label>ACCOUNT ID : {{RetrievedAccount.Corporate_Address_Zip}}</label>
+            <br />
+            <label>ACCOUNT ID : {{RetrievedAccount.Corporate_Address_Country}}</label>
+            <br />
+            <label>ACCOUNT ID : {{RetrievedAccount.Corporate_Phone_1}}</label>
+            <br />
+            <label>ACCOUNT ID : {{RetrievedAccount.Corporate_Phone_2}}</label>
+            <br />
+            <label>ACCOUNT ID : {{RetrievedAccount.Corporate_Phone_3}}</label>
+            <br />
+            <label>ACCOUNT ID : {{RetrievedAccount.Corporate_ID}}</label>
+            <br />
+         
+            <label>SITE ID</label><select ng-model="Site_ID" ng-options="data in RetrievedAccount.Site_ID ">
+                <!--<option value="value">text</option>-->
+
+            </select>
+
+
+            <br />
+            <br />
+            <div>
+                <input type="submit" name="name" value="CREATE" />
+                <input type="submit" name="name" value="UPDATE" />
+                <input type="submit" name="name" value="DELETE" />
+            </div>
+
+
+
+
+        </p>
+
+
+
+    </div>
+</center>
+
+
+    </div>

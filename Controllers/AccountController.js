@@ -1,35 +1,37 @@
-var app = angular.module('AngularModule',[]);
+var app = angular.module('AngularModule', ['ngCookies','ngRoute']);
 
-var AccountController = function(uriFactory,$scope,$location,$cookieStore,apiDispatcher){
-	$scope.getAllAccounts = function(){
-		$scope.RetrievedData = [];
-		apiDispatcher.getAll(uriFactory.uri.getAllAccounts).then(function(res){
-			angular.forEach(res.data,function(value,key){
-			$scope.RetrievedData.push({
-				  id: value.id,
-				  Corporate_Name: value.Corporate_Name,
-				  Corporate_ShortName: value.Corporate_ShortName,
-				  Corporate_TradeName: value.Corporate_TradeName,
-				  Corporate_Address_Street: value.Corporate_Address_Street,
-				  Corporate_Address_City: value.Corporate_Address_City,
-				  Corporate_Address_State: value.Corporate_Address_State,
-				  Corporate_Address_Zip: value.Corporate_Address_Zip,
-				  Corporate_Address_Country: value.Corporate_Address_Country,
-				  Corporate_Phone_1: value.Corporate_Phone_1,
-				  Corporate_Phone_2: value.Corporate_Phone_2,
-				  Corporate_Phone_3: value.Corporate_Phone_3,
-				  Corporate_Logo: value.Corporate_Logo,
-				  Corporate_ID: value.Corporate_ID,
-				  Site_ID: value.Site_ID
-			});
-			
-		});
-	},function(){
+var AccountController = function(uriFactory,$scope,$location,$cookieStore,apiDispatcher,loginService){
+    $scope.getAllAccounts = function () {
+        loginService.doLogin(uriFactory.uri.getToken);
+        $scope.RetrievedData = [];
+        apiDispatcher.getAll(uriFactory.uri.getAllAccounts).then(function (res) {
+            angular.forEach(res.data, function (value, key) {
+                $scope.RetrievedData.push({
+                    id: value.id,
+                    Corporate_Name: value.Corporate_Name,
+                    Corporate_ShortName: value.Corporate_ShortName,
+                    Corporate_TradeName: value.Corporate_TradeName,
+                    Corporate_Address_Street: value.Corporate_Address_Street,
+                    Corporate_Address_City: value.Corporate_Address_City,
+                    Corporate_Address_State: value.Corporate_Address_State,
+                    Corporate_Address_Zip: value.Corporate_Address_Zip,
+                    Corporate_Address_Country: value.Corporate_Address_Country,
+                    Corporate_Phone_1: value.Corporate_Phone_1,
+                    Corporate_Phone_2: value.Corporate_Phone_2,
+                    Corporate_Phone_3: value.Corporate_Phone_3,
+                    Corporate_Logo: value.Corporate_Logo,
+                    Corporate_ID: value.Corporate_ID,
+                    Site_ID: value.Site_ID
+                });
 
-	});
+            });
+        }, function () {
+
+        });
+    }
 
 	$scope.showAccount = function(index){
-		$location.path('/Account');
+		$location.path('/Accounts');
 		$cookieStore.put('AccountId',$scope.RetrievedData[index].id);
 	}	
 

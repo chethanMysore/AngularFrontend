@@ -1,6 +1,6 @@
-angular.module('AngularModule', ['ngRoute']).
+var app = angular.module('AngularModule', ['ngCookies','ngRoute']).
 config(['$routeprovider', function ($routeProvider) {
-    $routeProvider.when('/Accounts', { templateUrl: 'Account.html', controller: 'AccountController' })
+    $routeProvider.when('/Accounts', { templateUrl: 'Views/Account.html', controller: 'AccountController' })
                   .when('/Sites', { templateUrl: 'Sites.html', controller: 'SiteController' })
                   .when('/Systems', { templateUrl: 'Systems.html', controller: 'SystemsController' })
                   .when('/Devices', { templateUrl: 'Devices.html', controller: 'DevicesController' })

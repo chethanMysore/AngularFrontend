@@ -1,13 +1,13 @@
-var app = angular.module('AngularModule',[]);
+var app = angular.module('AngularModule', ['ngCookies', 'ngRoute']);
 
-app.factory('apiDispatcher',[$q,$http,'Upload',function($q,$http,Upload){
+app.factory('apiDispatcher',['Upload',function($q,$http,Upload,$cookieStore){
 	var defered = $q.defer();
-	onApiCall: function(uri,method,data){
+	var onApiCall = function(uri,method,data){
 		$http({
 			method: method,
 			url: uri,
 			data: data,
-			headers: {'authorization':''}
+			headers: {'authorization':'bearer ' + $cookieStore.get('access_token')}
 		}).then(function(res){
 			defered.resolve(res);
 		},function(){
@@ -16,11 +16,11 @@ app.factory('apiDispatcher',[$q,$http,'Upload',function($q,$http,Upload){
 		return defered.promise;
 	}
 	
-	onApiCall: function(uri,method){
+	var onApiCall = function(uri,method){
 		$http({
 			method: method,
 			url: uri,
-			headers: {'authorization':''}
+			headers: {'authorization':'bearer ' + $cookieStore.get('access_token')}
 		}).then(function(res){
 			defered.resolve(res);
 		},function(){
@@ -29,11 +29,11 @@ app.factory('apiDispatcher',[$q,$http,'Upload',function($q,$http,Upload){
 		return defered.promise;
 	}
 	
-	onUpload: function(uri,file){
+	var onUpload = function(uri,file){
 		Upload.upload({		
 			url: uri,
 			file: file,
-			headers: {'authorization':''}
+			headers: {'authorization':'bearer ' + $cookieStore.get('access_token')}
 		}).then(function(res){
 			defered.resolve(res);
 		},function(){

@@ -1,4 +1,4 @@
-var app = angular.module('AngularModule',[]);
+var app = angular.module('AngularModule', ['ngCookies', 'ngRoute']);
 
 app.factory('uriFactory',function(){
 	var uri = {};
@@ -30,6 +30,8 @@ app.factory('uriFactory',function(){
 	uri.updateConfiguration = 'http://ice-test-coreservicesapi.azurewebsites.net/api/DeviceIdentity';// using PUT method.
 	uri.getAllFirmwares = 'http://ice-test-coreservicesapi.azurewebsites.net/api/DeviceFirmware';
 	uri.getFirmwareById = 'http://ice-test-coreservicesapi.azurewebsites.net/api/DeviceFirmware?';//Device Id to be passed as parameter.
+
+	uri.getToken = "http://ice-test-tokenserver.azurewebsites.net/token";//to get the token
 
 	return uri;
 });
