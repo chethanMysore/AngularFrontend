@@ -1,12 +1,13 @@
-var app = angular.module('AngularModule', ['ngCookies','ngRoute']).
-config(['$routeprovider', function ($routeProvider) {
-    $routeProvider.when('/Accounts', { templateUrl: 'Views/Account.html', controller: 'AccountController' })
-                  .when('/Sites', { templateUrl: 'Sites.html', controller: 'SiteController' })
-                  .when('/Systems', { templateUrl: 'Systems.html', controller: 'SystemsController' })
-                  .when('/Devices', { templateUrl: 'Devices.html', controller: 'DevicesController' })
+
+
+app.config(function ($routeProvider,$httpProvider) {
+    $routeProvider.when('/Account', { templateUrl: 'Account.html', controller: 'AccountController' })
+                  .when('/Site', { templateUrl: 'Sites.html', controller: 'SiteController' })
+                  .when('/System', { templateUrl: 'Systems.html', controller: 'SystemsController' })
+                  .when('/Device', { templateUrl: 'Devices.html', controller: 'DevicesController' })
                   .when('/Config', { templateUrl: 'Config.html', controller: 'ConfigController' })
                   .when('/Firmware', { templateUrl: 'Systems.html', controller: 'FirmwareController' })
                   .otherwise({ redirectTo: '/Home' })
 }
-]);
+);
 

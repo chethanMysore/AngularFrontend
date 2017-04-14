@@ -2,11 +2,12 @@
 
 
 <div>
-    <div ng-init="getAllAccounts()">
+    <div  ng-init="getAllAccounts()">
         <h2>Account Id</h2>
+       
         <p ng-repeat="data in RetrievedData">
 
-            <a ng-href="#" ng-click="showAccount($index)">
+            <a  ng-click="showAccount($index)">
                 {{data.id}}
             </a>
 
@@ -17,50 +18,107 @@
     </div>
 
     <center>
-        <div>
+        <div ng-hide="post">
             <h2></h2>
             <p>
 
-                <label>ACCOUNT ID : {{RetrievedAccount.id}}</label>
+                <label>ACCOUNT ID : </label>{{id}}
                 <br />
                 <br />
-                <label>ACCOUNT ID : {{RetrievedAccount.Corporate_Name}}</label>
+                <label>Corporate_Name : </label><input type="text" ng-model="Corporate_Name" value="" />
                 <br />
-                <label>ACCOUNT ID : {{RetrievedAccount.Corporate_ShortName}}</label>
+                <label>Corporate_ShortName : </label><input type="text" ng-model="Corporate_ShortName" value="" />
                 <br />
-                <label>ACCOUNT ID : {{RetrievedAccount.Corporate_TradeName}}</label>
+                <label>Corporate_TradeName : </label><input type="text" ng-model="Corporate_TradeName" value="" />
                 <br />
-                <label>ACCOUNT ID : {{RetrievedAccount.Corporate_Address_Street}}</label>
+                <label>Corporate_Address_Street : </label><input type="text" ng-model="Corporate_Address_Street" value="" />
                 <br />
-                <label>ACCOUNT ID : {{RetrievedAccount.Corporate_Address_City}}</label>
+                <label>Corporate_Address_City : </label><input type="text" ng-model="Corporate_Address_City" value="" />
                 <br />
-                <label>ACCOUNT ID : {{RetrievedAccount.Corporate_Address_State}}</label>
+                <label>Corporate_Address_State : </label><input type="text" ng-model="Corporate_Address_State" value="" />
                 <br />
-                <label>ACCOUNT ID : {{RetrievedAccount.Corporate_Address_Zip}}</label>
+                <label>Corporate_Address_Zip : </label><input type="text" ng-model="Corporate_Address_Zip" value="" />
                 <br />
-                <label>ACCOUNT ID : {{RetrievedAccount.Corporate_Address_Country}}</label>
+                <label>Corporate_Address_Country : </label><input type="text" ng-model="Corporate_Address_Country" value="" />
                 <br />
-                <label>ACCOUNT ID : {{RetrievedAccount.Corporate_Phone_1}}</label>
+                <label>Corporate_Phone_1 : </label><input type="text" ng-model="Corporate_Phone_1" value="" />
                 <br />
-                <label>ACCOUNT ID : {{RetrievedAccount.Corporate_Phone_2}}</label>
+                <label>Corporate_Phone_2 : </label><input type="text" ng-model="Corporate_Phone_2" value="" />
                 <br />
-                <label>ACCOUNT ID : {{RetrievedAccount.Corporate_Phone_3}}</label>
+                <label>Corporate_Phone_3 : </label><input type="text" ng-model="Corporate_Phone_3" value="" />
                 <br />
-                <label>ACCOUNT ID : {{RetrievedAccount.Corporate_ID}}</label>
+                <label>Corporate_ID : </label><input type="text" ng-model="Corporate_ID" value="" />
                 <br />
 
-                <label>SITE ID</label><select ng-model="Site_ID" ng-options="data in RetrievedAccount.Site_ID ">
+                <!--<label>SITE ID</label><select ng-model="Site_ID" ng-options="data in Sites ">-->
                     <!--<option value="value">text</option>-->
 
-                </select>
+                <!--</select>-->
+
+
+                <br />
+                <br />
+                <div ng-hide="update">
+                    <input type="submit" name="name" value="CREATE" ng-click="postClicked()"/>
+                    <input type="submit" name="name" value="UPDATE" ng-click="updateClicked()"/>
+                    <input type="submit" name="name" value="DELETE" ng-click="deleteAccount()"/>
+                </div>
+                <div ng-show="update">
+                    <input type="submit" name="name" value="Post" ng-click="updateAccount()" />
+                    <input type="submit" name="name" value="Cancel" ng-click="reset()" />
+                </div>
+
+
+
+
+            </p>
+
+
+
+        </div>
+        <div ng-show="post">
+            <h2></h2>
+            <p>
+
+                <label>ACCOUNT ID : </label><input type="text" ng-model="id" value="" />
+                <br />
+                <br />
+                <label>Corporate_Name : </label><input type="text" ng-model="Corporate_Name" value="" />
+                <br />
+                <label>Corporate_ShortName : </label><input type="text" ng-model="Corporate_ShortName" value="" />
+                <br />
+                <label>Corporate_TradeName : </label><input type="text" ng-model="Corporate_TradeName" value="" />
+                <br />
+                <label>Corporate_Address_Street : </label><input type="text" ng-model="Corporate_Address_Street" value="" />
+                <br />
+                <label>Corporate_Address_City : </label><input type="text" ng-model="Corporate_Address_City" value="" />
+                <br />
+                <label>Corporate_Address_State : </label><input type="text" ng-model="Corporate_Address_State" value="" />
+                <br />
+                <label>Corporate_Address_Zip : </label><input type="text" ng-model="Corporate_Address_Zip" value="" />
+                <br />
+                <label>Corporate_Address_Country : </label><input type="text" ng-model="Corporate_Address_Country" value="" />
+                <br />
+                <label>Corporate_Phone_1 : </label><input type="text" ng-model="Corporate_Phone_1" value="" />
+                <br />
+                <label>Corporate_Phone_2 : </label><input type="text" ng-model="Corporate_Phone_2" value="" />
+                <br />
+                <label>Corporate_Phone_3 : </label><input type="text" ng-model="Corporate_Phone_3" value="" />
+                <br />
+                <label>Corporate_ID : </label><input type="text" ng-model="Corporate_ID" value="" />
+                <br />
+
+                <!--<label>SITE ID</label><select ng-model="Site_ID" ng-options="data in Sites ">-->
+                <!--<option value="value">text</option>-->
+                <!--</select>-->
 
 
                 <br />
                 <br />
                 <div>
-                    <input type="submit" name="name" value="CREATE" />
-                    <input type="submit" name="name" value="UPDATE" />
-                    <input type="submit" name="name" value="DELETE" />
+                    <input type="submit" name="name" value="Post" ng-click="createAccount()"/>
+                    <input type="submit" name="name" value="Cancel" ng-click="reset()"/>
+                   
                 </div>
 
 

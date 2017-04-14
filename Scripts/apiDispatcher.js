@@ -1,13 +1,15 @@
-var app = angular.module('AngularModule', ['ngCookies', 'ngRoute']);
 
-app.factory('apiDispatcher',['Upload',function($q,$http,Upload,$cookieStore){
+
+app.factory('apiDispatcher', ['$q', '$http', 'Upload', '$cookieStore', function ($q, $http, Upload, $cookieStore) {
 	var defered = $q.defer();
-	var onApiCall = function(uri,method,data){
+	var onDataApiCall = function (uri, method, data) {
+	    console.log('inside apicall');
+	    console.log(data);
 		$http({
 			method: method,
 			url: uri,
 			data: data,
-			headers: {'authorization':'bearer ' + $cookieStore.get('access_token')}
+			headers: {'authorization':'bearer ' + $cookieStore.get('access_token'),'Content-Type':'application/json'}
 		}).then(function(res){
 			defered.resolve(res);
 		},function(){
@@ -21,7 +23,9 @@ app.factory('apiDispatcher',['Upload',function($q,$http,Upload,$cookieStore){
 			method: method,
 			url: uri,
 			headers: {'authorization':'bearer ' + $cookieStore.get('access_token')}
-		}).then(function(res){
+		}).then(function (res) {
+		    console.log('inside apiCall, Response: ' + res)
+		    console.log(res);
 			defered.resolve(res);
 		},function(){
 			defered.reject();
@@ -45,13 +49,16 @@ return{
 	getAll: function(uri){
 		return onApiCall(uri,'GET');
 	},
-	getById : function(uri){
+	getById: function (uri) {
+        console.log(uri);
 		return onApiCall(uri,'GET');
 			
 			
 	},
-	postData: function(uri,data){
-		return onApiCall(uri,'POST',data);
+	postData: function (uri, data) {
+	    console.log('still calling');
+	    console.log(data);
+	    return onDataApiCall(uri, 'POST', data);
 	},
 	deleteById : function(uri){
 		return onApiCall(uri,'DELETE');
@@ -61,8 +68,10 @@ return{
 	uploadFile: function(uri,file){
 		return onApiCall(uri,file);
 	},
-	update : function(uri){
-		return onApiCall(uri,'PUT');
+	update: function (uri, data) {
+	    console.log('inside update');
+	    console.log(data);
+	    return onDataApiCall(uri, 'PUT',data);
 			
 	}
 }
