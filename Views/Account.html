@@ -59,29 +59,29 @@ checkboxes {
                 <label>ACCOUNT ID : </label>{{id}}
                 <br />
                 <br />
-                <label>Corporate_Name : </label><input type="text" ng-model="Corporate_Name" value="" />
+                <label>Corporate_Name : </label><input type="text" ng-model="Corporate_Name" value=""disabled />
                 <br />
-                <label>Corporate_ShortName : </label><input type="text" ng-model="Corporate_ShortName" value="" />
+                <label>Corporate_ShortName : </label><input type="text" ng-model="Corporate_ShortName" value="" disabled/>
                 <br />
-                <label>Corporate_TradeName : </label><input type="text" ng-model="Corporate_TradeName" value="" />
+                <label>Corporate_TradeName : </label><input type="text" ng-model="Corporate_TradeName" value=""  disabled/>
                 <br />
-                <label>Corporate_Address_Street : </label><input type="text" ng-model="Corporate_Address_Street" value="" />
+                <label>Corporate_Address_Street : </label><input type="text" ng-model="Corporate_Address_Street" value="" disabled />
                 <br />
-                <label>Corporate_Address_City : </label><input type="text" ng-model="Corporate_Address_City" value="" />
+                <label>Corporate_Address_City : </label><input type="text" ng-model="Corporate_Address_City" value=""  disabled/>
                 <br />
-                <label>Corporate_Address_State : </label><input type="text" ng-model="Corporate_Address_State" value="" />
+                <label>Corporate_Address_State : </label><input type="text" ng-model="Corporate_Address_State" value="" disabled/>
                 <br />
-                <label>Corporate_Address_Zip : </label><input type="text" ng-model="Corporate_Address_Zip" value="" />
+                <label>Corporate_Address_Zip : </label><input type="text" ng-model="Corporate_Address_Zip" value="" disabled/>
                 <br />
-                <label>Corporate_Address_Country : </label><input type="text" ng-model="Corporate_Address_Country" value="" />
+                <label>Corporate_Address_Country : </label><input type="text" ng-model="Corporate_Address_Country" value="" disabled/>
                 <br />
-                <label>Corporate_Phone_1 : </label><input type="text" ng-model="Corporate_Phone_1" value="" />
+                <label>Corporate_Phone_1 : </label><input type="text" ng-model="Corporate_Phone_1" value="" disabled/>
                 <br />
-                <label>Corporate_Phone_2 : </label><input type="text" ng-model="Corporate_Phone_2" value="" />
+                <label>Corporate_Phone_2 : </label><input type="text" ng-model="Corporate_Phone_2" value="" disabled/>
                 <br />
-                <label>Corporate_Phone_3 : </label><input type="text" ng-model="Corporate_Phone_3" value="" />
+                <label>Corporate_Phone_3 : </label><input type="text" ng-model="Corporate_Phone_3" value="" disabled/>
                 <br />
-                <label>Corporate_ID : </label><input type="text" ng-model="Corporate_ID" value="" />
+                <label>Corporate_ID : </label><input type="text" ng-model="Corporate_ID" value="" disabled/>
                 <br />
                 
                 <div ng-hide="update">
@@ -162,7 +162,19 @@ checkboxes {
                 <label>Corporate_ID : </label><input type="text" ng-model="Corporate_ID" value="" />
                 <br />
 
-
+                <div class="multiselect">
+                    <div class="selectBox" ng-click="showCheckboxes()">
+                        <select>
+                            <option>Select an option</option>
+                        </select>
+                        <div class="overSelect"></div>
+                    </div>
+                    <div ng-show="list">
+                        <label for="one" class="listing" ng-repeat="data in RetrievedSites" >
+                            <input type="checkbox" id="one" ng-model="RetrievedSites[$index].isChecked" ng-checked="RetrievedSites[$index].isChecked" />{{data.siteId}}
+                        </label>
+                    </div>
+                </div>
                 <!--<label>SITE ID</label><select ng-model="Site_ID" ng-options="data in Sites ">-->
                 <!--<option value="value">text</option>-->
                 <!--</select>-->
@@ -171,8 +183,8 @@ checkboxes {
                 <br />
                 <br />
                 <div>
-                    <input type="submit" name="name" value="Post" ng-click="createAccount()"/>
-                    <input type="submit" name="name" value="Cancel" ng-click="reset()"/>
+                    <input type="submit" name="name" value="Post" ng-click="createAccount()" />
+                    <input type="submit" name="name" value="Cancel" ng-click="reset()" />
 
                 </div>
 

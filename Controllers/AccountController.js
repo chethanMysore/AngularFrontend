@@ -9,6 +9,7 @@ var AccountController = function (uriFactory, $scope, $location, $cookieStore, a
         $scope.Sites = {};
         alert('hi');
         console.log(uriFactory.getToken);
+        console.log('inside getAllAccounts');
         loginService.doLogin(uriFactory.getToken).then(function (res) {
             $scope.RetrievedData = [];
             apiDispatcher.getAll(uriFactory.getAllAccounts).then(function (res) {
@@ -30,7 +31,7 @@ var AccountController = function (uriFactory, $scope, $location, $cookieStore, a
                         Corporate_ID: value.corporate_ID,
                         Site_ID: value.site_ID
                     });
-
+                    //console.log($scope.RetrievedData[0].Site_ID);
                 });
             }, function () {
 
@@ -42,6 +43,26 @@ var AccountController = function (uriFactory, $scope, $location, $cookieStore, a
 
     $scope.postClicked = function () {
         $scope.post = true;
+        $scope.RetrievedSites = [];
+
+        apiDispatcher.getAll(uriFactory.getAllSites).then(function (response) {
+            angular.forEach(response.data, function (value, key) {
+                //if(value.account_ID == $cookieStore.get('AccountId')){
+                $scope.RetrievedSites.push({
+                    siteId: value.id,
+                    isChecked: false
+                });
+                //}
+                //else {
+                //    $scope.RetrievedSites.push({
+                //        siteId: value.id,
+                //        isChecked: false
+                //    });
+                //}
+            });
+
+        }, function () { });
+        console.log($scope.RetrievedSites);
     }
 
     $scope.updateClicked = function () {
@@ -66,17 +87,17 @@ var AccountController = function (uriFactory, $scope, $location, $cookieStore, a
 	    $scope.RetrievedAccount = $scope.RetrievedData[index];
 	    $scope.id = $scope.RetrievedAccount.id;
 	    $scope.Corporate_Name = $scope.RetrievedAccount.Corporate_Name,
-	     $scope.Corporate_ShortName = $scope.RetrievedAccount.Corporate_ShortName,
-	      $scope.Corporate_TradeName = $scope.RetrievedAccount.Corporate_TradeName,
-	     $scope.Corporate_Address_Street = $scope.RetrievedAccount.Corporate_Address_Street,
-	     $scope.Corporate_Address_City = $scope.RetrievedAccount.Corporate_Address_City,
+	    $scope.Corporate_ShortName = $scope.RetrievedAccount.Corporate_ShortName,
+	    $scope.Corporate_TradeName = $scope.RetrievedAccount.Corporate_TradeName,
+	    $scope.Corporate_Address_Street = $scope.RetrievedAccount.Corporate_Address_Street,
+	    $scope.Corporate_Address_City = $scope.RetrievedAccount.Corporate_Address_City,
 	    $scope.Corporate_Address_State = $scope.RetrievedAccount.Corporate_Address_State,
-	   $scope.Corporate_Address_Zip = $scope.RetrievedAccount.Corporate_Address_Zip,
+	    $scope.Corporate_Address_Zip = $scope.RetrievedAccount.Corporate_Address_Zip,
 	    $scope.Corporate_Address_Country = $scope.RetrievedAccount.Corporate_Address_Country,
-	     $scope.Corporate_Phone_1 = $scope.RetrievedAccount.Corporate_Phone_1,
+	    $scope.Corporate_Phone_1 = $scope.RetrievedAccount.Corporate_Phone_1,
 	    $scope.Corporate_Phone_2 = $scope.RetrievedAccount.Corporate_Phone_2,
-	     $scope.Corporate_Phone_3 = $scope.RetrievedAccount.Corporate_Phone_3,
-	     $scope.Corporate_Logo = $scope.RetrievedAccount.Corporate_Logo,
+	    $scope.Corporate_Phone_3 = $scope.RetrievedAccount.Corporate_Phone_3,
+	    $scope.Corporate_Logo = $scope.RetrievedAccount.Corporate_Logo,
 	    $scope.Corporate_ID = $scope.RetrievedAccount.Corporate_ID,
         $scope.Site_ID = $scope.RetrievedAccount.Site_ID
 	    //$scope.getAccountById();
@@ -117,7 +138,16 @@ var AccountController = function (uriFactory, $scope, $location, $cookieStore, a
 
 	$scope.reset = function () { }
 
-	$scope.createAccount = function(){
+	$scope.createAccount = function () {
+	    console.log($scope.RetrievedSites);
+	    var selected_Sites = [];
+	    angular.forEach($scope.RetrievedSites, function (value, key) {
+	        if (value.isChecked){
+	            selected_Sites.push(value.siteId);
+	        }
+	    })
+	    console.log(selected_Sites);
+	    console.log($scope.Site_ID);
 		var data = {
 				  id: $scope.id,
 				  corporate_Name: $scope.Corporate_Name,
@@ -133,7 +163,7 @@ var AccountController = function (uriFactory, $scope, $location, $cookieStore, a
 				  corporate_Phone_3: $scope.Corporate_Phone_3,
 				  corporate_Logo: $scope.Corporate_Logo,
 				  corporate_ID: $scope.Corporate_ID,
-				  Site_ID: $scope.Site_ID
+				  Site_ID: selected_Sites
 		};
 		apiDispatcher.postData(uriFactory.createAccount,data).then(function(res){
 
