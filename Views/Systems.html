@@ -1,0 +1,159 @@
+
+<style>
+    .multiselect {
+        width: 200px;
+    }
+
+    .selectBox {
+        position: relative;
+    }
+
+        .selectBox select {
+            width: 100%;
+            font-weight: bold;
+        }
+
+    .overSelect {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+    }
+
+    checkboxes {
+        display: none;
+        border: 1px #dadada solid;
+    }
+
+    .listing {
+        display: block;
+    }
+
+        .listing:hover {
+            background-color: #1e90ff;
+        }
+</style>
+
+<div>
+    <div ng-init="getAllSystems()">
+        <h2>System Id</h2>
+
+        <p ng-repeat="data in RetrievedData1">
+
+            <a ng-click="showSystem($index)">
+                {{data.Sysid}}
+            </a>
+
+
+
+
+        </p>
+    </div>
+
+    <center>
+        <div ng-hide="post">
+            <h2></h2>
+            <p>
+
+                <label>SYSTEM ID : </label>{{System_id}}
+                <br />
+                <br />
+                <label>System_Name : </label><input type="text" ng-model="System_Name" value="" />
+                <br />
+                <label>System_Location : </label><input type="text" ng-model="System_Location" value="" />
+                <br />
+                <label>Site_Id : </label><input type="text" ng-model="Site_Id" value="" />
+                <br />
+                <label>Account_Id : </label><input type="text" ng-model="Account_Id" value="" />
+                <br />
+
+                <div ng-hide="update">
+                    <label>Device_Identity</label><select ng-model="Device_Identity" ng-options="data for data in Device_Identity "></select>
+                </div>
+
+
+                <div class="multiselect" ng-show="update">
+                    <div class="selectBox" ng-click="showCheckboxes()">
+                        <select>
+                            <option>Select an option</option>
+                        </select>
+                        <div class="overSelect"></div>
+                    </div>
+                    <div ng-show="list">
+                        <label for="one" class="listing" ng-repeat="data in Device_Identity">
+                            <input type="checkbox" id="one" />{{data}}
+                        </label>
+                        <!--<label for="two">
+                            <input type="checkbox" id="two" />Second checkbox
+                        </label>
+                        <label for="three">
+                            <input type="checkbox" id="three" />Third checkbox
+                        </label>-->
+                    </div>
+                </div>
+
+
+                <br />
+                <br />
+                <div ng-hide="update">
+                    <input type="submit" name="name" value="CREATE" ng-click="postClicked()" />
+                    <input type="submit" name="name" value="UPDATE" ng-click="updateClicked()" />
+                    <input type="submit" name="name" value="DELETE" ng-click="deleteSystem()" />
+                </div>
+                <div ng-show="update">
+                    <input type="submit" name="name" value="Post" ng-click="updateSystem()" />
+                    <input type="submit" name="name" value="Cancel" ng-click="reset()" />
+                </div>
+
+
+
+
+            </p>
+
+
+
+        </div>
+        <div ng-show="post">
+            <h2></h2>
+            <p>
+
+                <label>SYSTEM ID : </label><input type="text" ng-model="id" value="" />
+                <br />
+                <br />
+                <label>System_Name : </label><input type="text" ng-model="System_Name" value="" />
+                <br />
+                <label>System_Location : </label><input type="text" ng-model="System_Location" value="" />
+                <br />
+                <label>Site_Id : </label><input type="text" ng-model="Site_Id" value="" />
+                <br />
+                <label>Account_Id : </label><input type="text" ng-model="Account_Id" value="" />
+                <br />
+                
+                
+
+                <!--<label>SITE ID</label><select ng-model="Site_ID" ng-options="data in Sites ">-->
+                <!--<option value="value">text</option>-->
+                <!--</select>-->
+
+
+                <br />
+                <br />
+                <div>
+                    <input type="submit" name="name" value="Post" ng-click="createSystem()" />
+                    <input type="submit" name="name" value="Cancel" ng-click="reset()" />
+
+                </div>
+
+
+
+
+            </p>
+
+
+
+        </div>
+    </center>
+
+
+</div>
