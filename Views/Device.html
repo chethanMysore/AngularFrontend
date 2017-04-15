@@ -1,0 +1,112 @@
+
+
+
+<div>
+    <div ng-init="getAllDevices()">
+        <h2>Devices </h2>
+
+        <p ng-repeat="data in RetrievedData">
+
+            <a ng-click="showDevice($index)">
+                {{data.DeviceId}}
+            </a>
+
+        </p>
+    </div>
+
+    <center>
+        <div ng-hide="post">
+            <h2></h2>
+            <p>
+
+                <label>Device : </label>{{DeviceId}}
+                <br />
+                <br />
+                <label>DeviceId : </label><input type="text" ng-model="DeviceId" value="" />
+                <br />
+                <label>DeviceKey : </label><input type="text" ng-model="DeviceKey" value="" />
+                <br />
+                <label>IOTHubEndpoint : </label><input type="text" ng-model="IOTHubEndpoint" value="" />
+                <br />
+                <label>SerialNumber : </label><input type="text" ng-model="SerialNumber" value="" />
+                <br />
+                <label>MACAddress : </label><input type="text" ng-model="MACAddress" value="" />
+                <br />
+                <label>BLEUUID : </label><input type="text" ng-model="BLEUUID" value="" />
+                <br />
+                <label>AccountID : </label><input type="text" ng-model="AccountID" value="" />
+                <br />
+                <label>SystemID : </label><input type="text" ng-model="SystemID" value="" />
+                <br />
+                <label>ConfigurationStoreURL : </label><input type="text" ng-model="ConfigurationStoreURL" value="" />
+                <br />
+                <label>Lastupdatedconfiguration : </label><input type="text" ng-model="Lastupdatedconfiguration" value="" />
+
+                <br />
+                <label>PSK : </label><input type="text" ng-model="psk" value="" />
+                <br />
+                <label>DeviceFirmwareVersion : </label><input type="text" ng-model="DeviceFirmwareVersion" value="" />
+                
+                <!--<label>SITE ID</label><select ng-model="Site_ID" ng-options="data in Sites ">-->
+                <!--<option value="value">text</option>-->
+                <!--</select>-->
+
+                <br />
+                <br />
+                <div ng-hide="update">
+                    <input type="submit" name="name" value="CREATE" ng-click="postClicked()" />
+                    <input type="submit" name="name" value="UPDATE" ng-click="updateClicked()" />
+                    
+                </div>
+                <div ng-show="update">
+                    <input type="submit" name="name" value="Post" ng-click="updateDevice()" />
+                    <input type="submit" name="name" value="Cancel" ng-click="reset()" />
+                </div>
+            </p>
+        </div>
+
+        <div ng-show="post">
+            <h2></h2>
+            <p>
+
+                <label>Device : </label><input type="text" ng-model="DeviceId" value="" />
+                <br />              
+                <br />
+                <label>DeviceId : </label><input type="text" ng-model="DeviceId" value="" />
+                <br />
+                <label>DeviceKey : </label><input type="text" ng-model="DeviceKey" value="" />
+                <br />
+                <label>IOTHubEndpoint : </label><input type="text" ng-model="IOTHubEndpoint" value="" />
+                <br />
+                <label>SerialNumber : </label><input type="text" ng-model="SerialNumber" value="" />
+                <br />
+                <label>MACAddress : </label><input type="text" ng-model="MACAddress" value="" />
+                <br />
+                <label>BLEUUID : </label><input type="text" ng-model="BLEUUID" value="" />
+                <br />
+                <label>AccountID : </label><input type="text" ng-model="AccountID" value="" />
+                <br />
+                <label>SystemID : </label><input type="text" ng-model="SystemID" value="" />
+                <br />
+                <label>ConfigurationStoreURL : </label><input type="text" ng-model="ConfigurationStoreURL" value="" />
+                <br />
+                <label>Lastupdatedconfiguration : </label><input type="text" ng-model="Lastupdatedconfiguration" value="" />
+                <br />
+                <label>PSK : </label><input type="text" ng-model="psk" value="" />
+                <br />
+                <label>DeviceFirmwareVersion : </label><input type="text" ng-model="DeviceFirmwareVersion" value="" />
+                <!--<label>SITE ID</label><select ng-model="Site_ID" ng-options="data in Sites ">-->
+                <!--<option value="value">text</option>-->
+                <!--</select>-->
+                <br />
+                <br />
+                <div>
+                    <input type="submit" name="name" value="Post" ng-click="createDevice()" />
+                    <input type="submit" name="name" value="Cancel" ng-click="reset()" />
+                </div>
+            </p>
+        </div>
+    </center>
+
+
+</div>

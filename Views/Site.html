@@ -1,0 +1,125 @@
+
+
+
+<div>
+    <div ng-init="getAllSites()">
+        <h2>Site Id</h2>
+
+        <p ng-repeat="data in RetrievedData">
+
+            <a ng-click="showSite($index)">
+                {{data.id}}
+            </a>
+
+
+
+
+        </p>
+    </div>
+
+    <center>
+        <div ng-hide="post">
+            <h2></h2>
+            <p>
+
+                <label>SITE ID : </label>{{id}}
+                <br />
+                <br />
+                <label>Site_Name : </label><input type="text" ng-model="Site_Name" value="" />
+                <br />
+                <label>Site_ShortName : </label><input type="text" ng-model="Site_ShortName" value="" />
+                <br />
+                <label>Site_TradeName : </label><input type="text" ng-model="Site_TradeName" value="" />
+                <br />
+                <label>Site_Address_Street : </label><input type="text" ng-model="Site_Address_Street" value="" />
+                <br />
+                <label>Site_Address_City : </label><input type="text" ng-model="Site_Address_City" value="" />
+                <br />
+                <label>Site_Address_State : </label><input type="text" ng-model="Site_Address_State" value="" />
+                <br />
+                <label>Site_Address_Zip : </label><input type="text" ng-model="Site_Address_Zip" value="" />
+                <br />
+                <label>Site_Address_Country : </label><input type="text" ng-model="Site_Address_Country" value="" />
+                <br />
+                <label>Site_Phone_1 : </label><input type="text" ng-model="Site_Phone_1" value="" />
+                <br />
+                <label>Site_Phone_2 : </label><input type="text" ng-model="Site_Phone_2" value="" />
+                <br />
+                <label>Site_Phone_3 : </label><input type="text" ng-model="Site_Phone_3" value="" />
+                <br />
+                <label>Site_ID : </label><input type="text" ng-model="Site_ID" value="" />
+                <br />
+                
+                <label>Account_ID : </label><input type="text" ng-model="Account_ID" value="" />
+                <br />
+                <label>Account_Name : </label><input type="text" ng-model="Account_Name" value="" />
+                <br />
+                <!--<label>SITE ID</label><select ng-model="Site_ID" ng-options="data in Sites ">-->
+                <!--<option value="value">text</option>-->
+                <!--</select>-->
+
+                <br />
+                <br />
+                <div ng-hide="update">
+                    <input type="submit" name="name" value="CREATE" ng-click="postClicked()" />
+                    <input type="submit" name="name" value="UPDATE" ng-click="updateClicked()" />
+                    <input type="submit" name="name" value="DELETE" ng-click="deleteSite()" />
+                </div>
+                <div ng-show="update">
+                    <input type="submit" name="name" value="Post" ng-click="updateSite()" />
+                    <input type="submit" name="name" value="Cancel" ng-click="reset()" />
+                </div>
+            </p>
+        </div>
+
+        <div ng-show="post">
+            <h2></h2>
+            <p>
+
+                <label>SITE ID : </label><input type="text" ng-model="id" value="" />
+                <br />
+                <br />
+                <label>Site_Name: </label><input type="text" ng-model="Site_Name" value="" />
+                <br />
+                <label>Site_ShortName : </label><input type="text" ng-model="Site_ShortName" value="" />
+                <br />
+                <label>Site_TradeName : </label><input type="text" ng-model="Site_TradeName" value="" />
+                <br />
+                <label>Site_Address_Street : </label><input type="text" ng-model="Site_Address_Street" value="" />
+                <br />
+                <label>Site_Address_City : </label><input type="text" ng-model="Site_Address_City" value="" />
+                <br />
+                <label>Site_Address_State : </label><input type="text" ng-model="Site_Address_State" value="" />
+                <br />
+                <label>Site_Address_Zip : </label><input type="text" ng-model="Site_Address_Zip" value="" />
+                <br />
+                <label>Site_Address_Country : </label><input type="text" ng-model="Site_Address_Country" value="" />
+                <br />
+                <label>Site_Phone_1 : </label><input type="text" ng-model="Site_Phone_1" value="" />
+                <br />
+                <label>Site_Phone_2 : </label><input type="text" ng-model="Site_Phone_2" value="" />
+                <br />
+                <label>Site_Phone_3 : </label><input type="text" ng-model="Site_Phone_3" value="" />
+                <br />
+                <label>Site_Image : </label><input type="text" ng-model="Site_Image" value="" />
+                <br />
+                <label>Account_ID : </label><input type="text" ng-model="Account_ID" value="" />
+                <br />
+                <label>Account_Name : </label><input type="text" ng-model="Account_Name" value="" />
+                <br />
+
+                <!--<label>SITE ID</label><select ng-model="Site_ID" ng-options="data in Sites ">-->
+                <!--<option value="value">text</option>-->
+                <!--</select>-->
+                <br />
+                <br />
+                <div>
+                    <input type="submit" name="name" value="Post" ng-click="createSite()" />
+                    <input type="submit" name="name" value="Cancel" ng-click="reset()" />
+                </div>
+            </p>
+        </div>
+    </center>
+
+
+</div>
