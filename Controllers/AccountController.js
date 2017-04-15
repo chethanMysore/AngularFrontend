@@ -4,6 +4,7 @@ var AccountController = function (uriFactory, $scope, $location, $cookieStore, a
     $scope.post = false;
     $scope.update = false;
     $scope.delete = false;
+    $scope.list = false;
     $scope.getAllAccounts = function () {
         $scope.Sites = {};
         alert('hi');
@@ -27,7 +28,7 @@ var AccountController = function (uriFactory, $scope, $location, $cookieStore, a
                         Corporate_Phone_3: value.corporate_Phone_3,
                         Corporate_Logo: value.corporate_Logo,
                         Corporate_ID: value.corporate_ID,
-                        Site_ID: value.Site_ID
+                        Site_ID: value.site_ID
                     });
 
                 });
@@ -49,6 +50,12 @@ var AccountController = function (uriFactory, $scope, $location, $cookieStore, a
 
     $scope.deleteClicked = function () {
         $scope.delete = true;
+    }
+
+    $scope.showCheckboxes = function () {
+        //alert('hi');
+        $scope.list = !$scope.list;
+
     }
 
 	$scope.showAccount = function(index){

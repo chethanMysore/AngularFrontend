@@ -1,10 +1,44 @@
 ﻿
+<style>
+    .multiselect {
+  width: 200px;
+}
 
+.selectBox {
+  position: relative;
+}
+
+.selectBox select {
+  width: 100%;
+  font-weight: bold;
+}
+
+.overSelect {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+checkboxes {
+  display: none;
+  border: 1px #dadada solid;
+}
+
+.listing {
+  display: block;
+}
+
+.listing:hover {
+  background-color: #1e90ff;
+}
+</style>
 
 <div>
     <div  ng-init="getAllAccounts()">
         <h2>Account Id</h2>
-       
+
         <p ng-repeat="data in RetrievedData">
 
             <a  ng-click="showAccount($index)">
@@ -49,11 +83,31 @@
                 <br />
                 <label>Corporate_ID : </label><input type="text" ng-model="Corporate_ID" value="" />
                 <br />
-
-                <!--<label>SITE ID</label><select ng-model="Site_ID" ng-options="data in Sites ">-->
-                    <!--<option value="value">text</option>-->
-
-                <!--</select>-->
+                
+                <div ng-hide="update">
+                    <label>SITE ID</label><select ng-model="Site_ID" ng-options="data for data in Site_ID "></select>
+                </div>
+            
+   
+                <div class="multiselect" ng-show="update">
+                    <div class="selectBox" ng-click="showCheckboxes()">
+                        <select>
+                            <option>Select an option</option>
+                        </select>
+                        <div class="overSelect"></div>
+                    </div>
+                    <div ng-show="list" >
+                        <label for="one" class="listing" ng-repeat="data in Site_ID">
+                            <input type="checkbox" id="one" />{{data}}
+                        </label>
+                        <!--<label for="two">
+                            <input type="checkbox" id="two" />Second checkbox
+                        </label>
+                        <label for="three">
+                            <input type="checkbox" id="three" />Third checkbox
+                        </label>-->
+                    </div>
+                </div>
 
 
                 <br />
@@ -108,6 +162,7 @@
                 <label>Corporate_ID : </label><input type="text" ng-model="Corporate_ID" value="" />
                 <br />
 
+
                 <!--<label>SITE ID</label><select ng-model="Site_ID" ng-options="data in Sites ">-->
                 <!--<option value="value">text</option>-->
                 <!--</select>-->
@@ -118,7 +173,7 @@
                 <div>
                     <input type="submit" name="name" value="Post" ng-click="createAccount()"/>
                     <input type="submit" name="name" value="Cancel" ng-click="reset()"/>
-                   
+
                 </div>
 
 
