@@ -1,8 +1,9 @@
 
 
 app.factory('apiDispatcher', ['$q', '$http', 'Upload', '$cookieStore', function ($q, $http, Upload, $cookieStore) {
-	var defered = $q.defer();
-	var onDataApiCall = function (uri, method, data) {
+	
+    var onDataApiCall = function (uri, method, data) {
+        var defered = $q.defer();
 	    console.log('inside apicall');
 	    console.log(data);
 		$http({
@@ -11,14 +12,16 @@ app.factory('apiDispatcher', ['$q', '$http', 'Upload', '$cookieStore', function 
 			data: data,
 			headers: {'authorization':'bearer ' + $cookieStore.get('access_token'),'Content-Type':'application/json'}
 		}).then(function(res){
-			defered.resolve(res);
+		    defered.resolve(res);
+		    //return $q.resolve(res);
 		},function(){
 			defered.reject();
 		});
 		return defered.promise;
 	}
 	
-	var onApiCall = function(uri,method){
+	var onApiCall = function (uri, method) {
+	    var defered = $q.defer();
 		$http({
 			method: method,
 			url: uri,
@@ -26,14 +29,16 @@ app.factory('apiDispatcher', ['$q', '$http', 'Upload', '$cookieStore', function 
 		}).then(function (res) {
 		    console.log('inside apiCall, Response: ' + res)
 		    console.log(res);
-			defered.resolve(res);
+		    defered.resolve(res);
+		    //return $q.resolve(res);
 		},function(){
 			defered.reject();
 		});
 		return defered.promise;
 	}
 	
-	var onUpload = function(uri,file){
+	var onUpload = function (uri, file) {
+	    var defered = $q.defer();
 		Upload.upload({		
 			url: uri,
 			file: file,
