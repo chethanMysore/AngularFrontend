@@ -6,7 +6,7 @@
             margin: 0;
         }
 
-        ul {
+        .ulStyle {
             list-style-type: none;
             margin: 0;
             padding: 0;
@@ -55,9 +55,8 @@
     </style>
 </head>
 <body >
-    <div ng-app="AngularApp" ng-controller="HomeController">
-
-        <ul>
+    <div ng-app="AngularApp" ng-controller="HomeController">      
+        <ul class="ulStyle">
             <!--<li><a class="active" href="#home">Home</a></li>-->
             <li><a ng-click="AccountPage()">Account</a></li>
             <li><a ng-click="SitePage()">Sites</a></li>
@@ -82,11 +81,16 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.0/angular-cookies.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/danialfarid-angular-file-upload/12.0.4/ng-file-upload-shim.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/danialfarid-angular-file-upload/12.0.4/ng-file-upload.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.0/angular-animate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-sanitize/1.6.1/angular-sanitize.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ng-toast/2.0.0/ngToast.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ng-toast/2.0.0/ngToast.css">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
     <script src="Scripts/app.js"></script>
     <script src="Scripts/loginService.js"></script>
     <script src="Scripts/uriService.js"></script>

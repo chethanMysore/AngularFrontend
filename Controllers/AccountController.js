@@ -7,7 +7,7 @@ var AccountController = function (uriFactory, $scope, $location, $cookieStore, a
     $scope.list = false;
     $scope.getAllAccounts = function () {
         $scope.Sites = {};
-        alert('hi');
+       
         console.log(uriFactory.getToken);
         console.log('inside getAllAccounts');
         loginService.doLogin(uriFactory.getToken).then(function (res) {
@@ -31,13 +31,26 @@ var AccountController = function (uriFactory, $scope, $location, $cookieStore, a
                         Corporate_ID: value.corporate_ID,
                         Site_ID: value.site_ID
                     });
-                    //console.log($scope.RetrievedData[0].Site_ID);
+                  
                 });
             }, function () {
-
+                ngToast.create({
+                    className: 'success',
+                    content: '<p>Login Successful</p>',
+                    dismissOnTimeout: true,
+                    timeout: 4000,
+                    dismissOnClick: true
+                });
             });
         }, function () {
-            $location.path('/Home');
+            ngToast.create({
+                className: 'warning',
+                content: '<p>Oops!!! Something went wrong! please try again after sometime</p>',
+                dismissOnTimeout: true,
+                timeout: 4000,
+                dismissOnClick: true
+            });
+          
         });
     }
 
@@ -64,29 +77,31 @@ var AccountController = function (uriFactory, $scope, $location, $cookieStore, a
 
         apiDispatcher.getAll(uriFactory.getAllSites).then(function (response) {
             angular.forEach(response.data, function (value, key) {
-                //if(value.account_ID == $cookieStore.get('AccountId')){
+                
                 $scope.RetrievedSites.push({
                     siteId: value.id,
                     isChecked: false
                 });
-                //}
-                //else {
-                //    $scope.RetrievedSites.push({
-                //        siteId: value.id,
-                //        isChecked: false
-                //    });
-                //}
+                
             });
 
-        }, function () { });
-        console.log($scope.RetrievedSites);
+        }, function () {
+            ngToast.create({
+                className: 'warning',
+                content: '<p>Oops!!! Something went wrong! please try again after sometime</p>',
+                dismissOnTimeout: true,
+                timeout: 4000,
+                dismissOnClick: true
+            });
+        });
+        
     }
 
     $scope.updateClicked = function () {
         $scope.update = true;
         for (var i = 1; i < 13; i++) {
             document.getElementById("rem" + i).removeAttribute("disabled");
-            //document.getElementById("rem").removeAttribute("disabled");
+            
         }
 
         $scope.RetrievedSites = [];
@@ -105,7 +120,15 @@ var AccountController = function (uriFactory, $scope, $location, $cookieStore, a
                     });
                 }
             });
-        }, function () { });
+        }, function () {
+            ngToast.create({
+                className: 'warning',
+                content: '<p>Oops!!! Something went wrong! please try again after sometime</p>',
+                dismissOnTimeout: true,
+                timeout: 4000,
+                dismissOnClick: true
+            });
+        });
     }
 
     $scope.deleteClicked = function () {
@@ -169,10 +192,16 @@ var AccountController = function (uriFactory, $scope, $location, $cookieStore, a
             });
 
         }, function () {
-
+            ngToast.create({
+                className: 'warning',
+                content: '<p>Oops!!! Something went wrong! please try again after sometime</p>',
+                dismissOnTimeout: true,
+                timeout: 4000,
+                dismissOnClick: true
+            });
         });
 
-        console.log($scope.RetrievedAccount);
+        
     }
 
     $scope.reset = function () {
@@ -254,25 +283,55 @@ var AccountController = function (uriFactory, $scope, $location, $cookieStore, a
             Site_ID: selected_Sites
         };
         apiDispatcher.update(uriFactory.updateAccount, data).then(function (res) {
-
+            ngToast.create({
+                className: 'success',
+                content: '<p>Account Updated Successfully</p>',
+                dismissOnTimeout: true,
+                timeout: 4000,
+                dismissOnClick: true
+            });
         }, function () {
-
+            ngToast.create({
+                className: 'danger',
+                content: '<p>Oops!!! Update Failed! Change a few things and try again</p>',
+                dismissOnTimeout: true,
+                timeout: 4000,
+                dismissOnClick: true
+            });
         });
     }
 
     $scope.deleteAccount = function () {
         apiDispatcher.deleteById(uriFactory.deleteAccount + $cookieStore.get('AccountId')).then(function (res) {
-
+            ngToast.create({
+                className: 'success',
+                content: '<p>Account Deleted Successfully</p>',
+                dismissOnTimeout: true,
+                timeout: 4000,
+                dismissOnClick: true
+            });
         }, function (res) {
-
+            ngToast.create({
+                className: 'danger',
+                content: '<p>Oops!!! Account cannot be deleted</p>',
+                dismissOnTimeout: true,
+                timeout: 4000,
+                dismissOnClick: true
+            });
         });
     }
 
     $scope.getAccountInfo = function () {
         apiDispatcher.getAll(uriFactory.getAccountInfo).then(function (res) {
-
+            
         }, function () {
-
+            ngToast.create({
+                className: 'warning',
+                content: '<p>Oops!!! Something went wrong! please try again after sometime</p>',
+                dismissOnTimeout: true,
+                timeout: 4000,
+                dismissOnClick: true
+            });
         });
     }
 }

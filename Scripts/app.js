@@ -1,1 +1,1 @@
-var app = angular.module('AngularApp',['ngCookies','ngRoute','ngFileUpload']);
+var app = angular.module('AngularApp', ['ngCookies','ngRoute','ngFileUpload','ngToast']);
