@@ -1,11 +1,11 @@
 'use strict';
 
-var DeviceIdentityController = function (uriFactory, $scope, $location, $cookieStore, apiDispatcher, loginService) {
+var DeviceIdentityController = function (uriFactory, $scope, $location, $cookieStore, apiDispatcher, loginService,ngToast) {
     $scope.post = false;
     $scope.update = false;
     $scope.delete = false;
     $scope.getAllDevices = function () {       
-        alert('hi');
+       
         console.log(uriFactory.getToken);
         loginService.doLogin(uriFactory.getToken).then(function (res) {
             $scope.RetrievedData = [];
@@ -29,15 +29,39 @@ var DeviceIdentityController = function (uriFactory, $scope, $location, $cookieS
 
                 });
             }, function () {
-
+                ngToast.create({
+                    className: 'success',
+                    content: '<p>Login Successful</p>',
+                    dismissOnTimeout: true,
+                    timeout: 4000,
+                    dismissOnClick: true
+                });
             });
         }, function () {
-            $location.path('/Home');
+            ngToast.create({
+                className: 'warning',
+                content: '<p>Oops!!! Something went wrong! please try again after sometime</p>',
+                dismissOnTimeout: true,
+                timeout: 4000,
+                dismissOnClick: true
+            });
         });
     }
 
     $scope.postClicked = function () {
         $scope.post = true;
+        $scope.DeviceId = "";
+        $scope.DeviceKey = "";
+        $scope.IOTHubEndpoint = "";
+        $scope.SerialNumber = "";
+        $scope.MACAddress = "";
+        $scope.BLEUUID = "";
+        $scope.AccountID = "";
+        $scope.SystemID = "";
+        $scope.ConfigurationStoreURL = "";
+        $scope.Lastupdatedconfiguration = "";
+        $scope.psk = "";
+        $scope.DeviceFirmwareVersion = "";
     }
 
     $scope.updateClicked = function () {
@@ -49,9 +73,10 @@ var DeviceIdentityController = function (uriFactory, $scope, $location, $cookieS
     }
 
     $scope.showDevice = function (index) {
-        //$location.path('/Accounts');
+       
         $cookieStore.put('DeviceId', $scope.RetrievedData[index].id);
-        console.log($scope.RetrievedData[index]);
+
+       
         $scope.RetrievedDevice = $scope.RetrievedData[index];
         $scope.id = $scope.RetrievedDevice.id;
         $scope.DeviceId = $scope.RetrievedDevice.DeviceId,
@@ -94,13 +119,24 @@ var DeviceIdentityController = function (uriFactory, $scope, $location, $cookieS
             });
 
         }, function () {
-
+            ngToast.create({
+                className: 'warning',
+                content: '<p>Oops!!! Something went wrong! please try again after sometime</p>',
+                dismissOnTimeout: true,
+                timeout: 4000,
+                dismissOnClick: true
+            });
         });
 
         console.log($scope.RetrievedDevice);
     }
 
-    $scope.reset = function () { }
+    $scope.reset = function () {
+        $scope.post = false;
+        $scope.update = false;
+        $scope.delete = false;
+        $scope.RetrievedDevice = [];
+    }
 
     $scope.createDevice = function () {
         var data = {
@@ -119,9 +155,21 @@ var DeviceIdentityController = function (uriFactory, $scope, $location, $cookieS
 
         };
         apiDispatcher.postData(uriFactory.createDevice, data).then(function (res) {
-
+            ngToast.create({
+                className: 'success',
+                content: '<p>Device Added Successfully</p>',
+                dismissOnTimeout: true,
+                timeout: 2000,
+                dismissOnClick: true
+            });
         }, function () {
-
+            ngToast.create({
+                className: 'warning',
+                content: '<p>Device Adding Failed! Please try again later</p>',
+                dismissOnTimeout: true,
+                timeout: 2000,
+                dismissOnClick: true
+            });
         });
     }
 
@@ -143,9 +191,21 @@ var DeviceIdentityController = function (uriFactory, $scope, $location, $cookieS
 
         };
         apiDispatcher.postData(uriFactory.updateDevice, data).then(function (res) {
-
+            ngToast.create({
+                className: 'success',
+                content: '<p>Device Updated Successfully</p>',
+                dismissOnTimeout: true,
+                timeout: 4000,
+                dismissOnClick: true
+            });
         }, function () {
-
+            ngToast.create({
+                className: 'danger',
+                content: '<p>Oops!!! Update Failed! Change a few things and try again</p>',
+                dismissOnTimeout: true,
+                timeout: 4000,
+                dismissOnClick: true
+            });
         });
     }
 
@@ -154,4 +214,4 @@ var DeviceIdentityController = function (uriFactory, $scope, $location, $cookieS
 
 }
 
-app.controller('DeviceIdentityController', ['uriFactory', '$scope', '$location', '$cookieStore', 'apiDispatcher', 'loginService', DeviceIdentityController]);
+app.controller('DeviceIdentityController', ['uriFactory', '$scope', '$location', '$cookieStore', 'apiDispatcher', 'loginService', 'ngToast', DeviceIdentityController]);

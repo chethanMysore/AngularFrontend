@@ -41,16 +41,98 @@
     th {
         text-align: left;
     }
+      .textbox {
+        background: #CDC1C5;
+        color: black;
+        width: 200px;
+        padding: 6px 15px 6px 35px;
+        border-radius: 20px;
+        box-shadow: 0 1px 0 #ccc inset;
+        transition: 500ms all ease;
+        outline: 0;
+    }
+
+        .textbox:hover {
+            width: 270px;
+        }
+
+
+   
+
+    .button {
+        display: inline-block;
+        margin: 0 auto;
+        -webkit-border-radius: 10px;
+        -webkit-box-shadow: 0px 3px rgba(128,128,128,1), /* gradient effects */
+        0px 4px rgba(118,118,118,1), 0px 5px rgba(108,108,108,1), 0px 6px rgba(98,98,98,1), 0px 7px rgba(88,88,88,1), 0px 8px rgba(78,78,78,1), 0px 14px 6px -1px rgba(128,128,128,1); /* shadow */
+        -webkit-transition: -webkit-box-shadow .1s ease-in-out;
+    }
+
+        .button span {
+            background-color: #E8E8E8;
+            background-image:
+            /* gloss gradient */
+            -webkit-gradient( linear, left bottom, left top, color-stop(50%,rgba(255,255,255,0)), color-stop(50%,rgba(255,255,255,0.3)), color-stop(100%,rgba(255,255,255,0.2))),
+            /* dark outside gradient */
+            -webkit-gradient( linear, left top, right top, color-stop(0%,rgba(210,210,210,0.3)), color-stop(20%,rgba(210,210,210,0)), color-stop(80%,rgba(210,210,210,0)), color-stop(100%,rgba(210,210,210,0.3))),
+            /* light inner gradient */
+            -webkit-gradient( linear, left top, right top, color-stop(0%,rgba(255,255,255,0)), color-stop(20%,rgba(255,255,255,0.5)), color-stop(80%,rgba(255,255,255,0.5)), color-stop(100%,rgba(255,255,255,0))),
+            /* diagonal line pattern */
+            -webkit-gradient( linear, 0% 100%, 100% 0%, color-stop(0%,rgba(255,255,255,0)), color-stop(40%,rgba(255,255,255,0)), color-stop(40%,#D2D2D1), color-stop(60%,#D2D2D1), color-stop(60%,rgba(255,255,255,0)), color-stop(100%,rgba(255,255,255,0)));
+            -webkit-box-shadow: 0px -1px #fff, /* top highlight */
+            0px 1px 1px #FFFFFF; /* bottom edge */
+            -webkit-background-size: 100%, 100%, 100%, 4px 4px;
+            -webkit-border-radius: 10px;
+            -webkit-transition: -webkit-transform .1s ease-in-out;
+            display: inline-block;
+            padding: 10px 40px 10px 40px;
+            color: #3A474D;
+            text-transform: uppercase;
+            font-family: 'TradeGothicLTStd-BdCn20','PT Sans Narrow';
+            font-weight: 700;
+            font-size: 32px;
+            text-shadow: 0px 1px #fff, 0px -1px #262F33;
+        }
+
+            .button span:hover {
+                color: #AEBF3B;
+                text-shadow: 0px -1px #97A63A;
+                cursor: pointer;
+            }
+
+        .button:active {
+            -webkit-box-shadow: 0px 3px rgba(128,128,128,1), 0px 4px rgba(118,118,118,1), 0px 5px rgba(108,108,108,1), 0px 6px rgba(98,98,98,1), 0px 7px rgba(88,88,88,1), 0px 8px rgba(78,78,78,1), 0px 10px 2px 0px rgba(128,128,128,.6); /* shadow */
+        }
+
+            .button:active span {
+                -webkit-transform: translate(0, 5px); /* depth of button press */
+            }
+
+        .button span:after {
+            content: ">";
+            display: block;
+            width: 10px;
+            height: 10px;
+            position: absolute;
+            right: 14px;
+            top: 12px;
+            font-family: 'Cabin';
+            font-weight: 700;
+            color: #AEBF3B;
+            text-shadow: 0px 1px #fff, 0px -1px #97A63A;
+            font-size: 26px;
+        }
 </style>
 
 
-
+<body>
+    <toast style="position:absolute;right:5px"></toast>
     <div ng-init="getAllDevices()" style="width:200px">
         <h2>Devices </h2>
         <table>
             <tr ng-repeat="data in RetrievedData">
 
-                <td ng-click="showDevice($index)"><a>{{data.id}}</a></td>
+                <td ng-click="showDevice($index)"><a>{{data.DeviceId}}</a></td>
             </tr>
 
         </table>
@@ -69,150 +151,142 @@
             <table cellpadding="5" cellspacing="5" align="left" class="table table-bordered">
 
                 <tr>
-                    <th>Device :</th>
+                    <th>Device ID:</th>
                     <td colspan="2">{{DeviceId}}</td>
                 </tr>
-
-                <tr>
-                    <th>DeviceId :</th>
-                    <td colspan="2"><input type="text" ng-model="DeviceId" value="" disabled /></td>
-                </tr>
-
                 <tr>
                     <th>DeviceKey :</th>
-                    <td colspan="2"><input type="text" ng-model="DeviceKey" value="" disabled /></td>
+                    <td colspan="2"><input type="text" ng-model="DeviceKey" value="" disabled class="textbox" id="rem2" /></td>
                 </tr>
                 <tr>
                     <th>IOTHubEndpoint :</th>
-                    <td colspan="2"><input type="text" ng-model="IOTHubEndpoint" value="" disabled /></td>
+                    <td colspan="2"><input type="text" ng-model="IOTHubEndpoint" value="" disabled class="textbox" id="rem3" /></td>
                 </tr>
                 <tr>
                     <th>SerialNumber :</th>
-                    <td colspan="2"><input type="text" ng-model="SerialNumber" value="" disabled/></td>
+                    <td colspan="2"><input type="text" ng-model="SerialNumber" value="" disabled class="textbox" id="rem4" /></td>
                 </tr>
                 <tr>
                     <th>MACAddress :</th>
-                    <td colspan="2"><input type="text" ng-model="MACAddress" value="" disabled/></td>
+                    <td colspan="2"><input type="text" ng-model="MACAddress" value="" disabled class="textbox" id="rem5" /></td>
                 </tr>
                 <tr>
                     <th>BLEUUID :</th>
-                    <td colspan="2"><input type="text" ng-model="BLEUUID" value=""disabled /></td>
+                    <td colspan="2"><input type="text" ng-model="BLEUUID" value="" disabled class="textbox" id="rem6" /></td>
                 </tr>
                 <tr>
                     <th>AccountID :</th>
-                    <td colspan="2"><input type="text" ng-model="AccountID" value="" disabled/></td>
+                    <td colspan="2"><input type="text" ng-model="AccountID" value="" disabled class="textbox" id="rem7" /></td>
                 </tr>
                 <tr>
                     <th>SystemID :</th>
-                    <td colspan="2"><input type="text" ng-model="SystemID" value="" disabled/></td>
+                    <td colspan="2"><input type="text" ng-model="SystemID" value="" disabled class="textbox" id="rem8" /></td>
                 </tr>
                 <tr>
                     <th>ConfigurationStoreURL :</th>
-                    <td colspan="2"><input type="text" ng-model="ConfigurationStoreURL" value="" disabled/></td>
+                    <td colspan="2"><input type="text" ng-model="ConfigurationStoreURL" value="" disabled class="textbox" id="rem9" /></td>
                 </tr>
                 <tr>
                     <th>Lastupdatedconfiguration :</th>
-                    <td colspan="2"><input type="text" ng-model="Lastupdatedconfiguration" value=""disabled /></td>
+                    <td colspan="2"><input type="text" ng-model="Lastupdatedconfiguration" value="" disabled class="textbox" id="rem10" /></td>
                 </tr>
                 <tr>
                     <th>PSK :</th>
-                    <td colspan="2"><input type="text" ng-model="psk" value="" disabled /></td>
+                    <td colspan="2"><input type="text" ng-model="psk" value="" disabled class="textbox" id="rem11" /></td>
                 </tr>
                 <tr>
                     <th>DeviceFirmwareVersion :</th>
-                    <td colspan="2"><input type="text" ng-model="DeviceFirmwareVersion" value=""disabled /></td>
+                    <td colspan="2"><input type="text" ng-model="DeviceFirmwareVersion" value="" disabled class="textbox" id="rem12" /></td>
                 </tr>
 
 
                 <tr ng-hide="update">
-                    <td><input type="submit" name="name" value="CREATE" ng-click="postClicked()" /></td>
-                    <td><input type="submit" name="name" value="UPDATE" ng-click="updateClicked()" /></td>
+                    <td><input type="submit" name="name" class="button" value="CREATE" ng-click="postClicked()" /></td>
+                    <td><input type="submit" name="name" class="button" value="UPDATE" ng-click="updateClicked()" /></td>
 
                 </tr>
                 <tr ng-show="update">
-                    <td><input type="submit" name="name" value="Post" ng-click="updateDevice()" /></td>
-                    <td><input type="submit" name="name" value="Cancel" ng-click="reset()" /></td>
+                    <td><input type="submit" name="name" class="button" value="Post" ng-click="updateDevice()" /></td>
+                    <td><input type="submit" name="name" class="button" value="Cancel" ng-click="reset()" /></td>
                 </tr>
             </table>
         </div>
 
 
 
-            <div ng-show="post">
-                <table cellpadding="5" cellspacing="5" align="left" class="table table-bordered">
-
-                    <tr>
-                        <th>Device :</th>
-                        <td colspan="2">{{DeviceId}}</td>
-                    </tr>
-
-                    <tr>
-                        <th>DeviceId :</th>
-                        <td colspan="2"><input type="text" ng-model="DeviceId" value="" disabled /></td>
-                    </tr>
-
-                    <tr>
-                        <th>DeviceKey :</th>
-                        <td colspan="2"><input type="text" ng-model="DeviceKey" value="" disabled /></td>
-                    </tr>
-                    <tr>
-                        <th>IOTHubEndpoint :</th>
-                        <td colspan="2"><input type="text" ng-model="IOTHubEndpoint" value="" /></td>
-                    </tr>
-                    <tr>
-                        <th>SerialNumber :</th>
-                        <td colspan="2"><input type="text" ng-model="SerialNumber" value="" /></td>
-                    </tr>
-                    <tr>
-                        <th>MACAddress :</th>
-                        <td colspan="2"><input type="text" ng-model="MACAddress" value="" /></td>
-                    </tr>
-                    <tr>
-                        <th>BLEUUID :</th>
-                        <td colspan="2"><input type="text" ng-model="BLEUUID" value="" /></td>
-                    </tr>
-                    <tr>
-                        <th>AccountID :</th>
-                        <td colspan="2"><input type="text" ng-model="AccountID" value="" /></td>
-                    </tr>
-                    <tr>
-                        <th>SystemID :</th>
-                        <td colspan="2"><input type="text" ng-model="SystemID" value="" /></td>
-                    </tr>
-                    <tr>
-                        <th>ConfigurationStoreURL :</th>
-                        <td colspan="2"><input type="text" ng-model="ConfigurationStoreURL" value="" /></td>
-                    </tr>
-                    <tr>
-                        <th>Lastupdatedconfiguration :</th>
-                        <td colspan="2"><input type="text" ng-model="Lastupdatedconfiguration" value="" /></td>
-                    </tr>
-                    <tr>
-                        <th>PSK :</th>
-                        <td colspan="2"><input type="text" ng-model="psk" value="" /></td>
-                    </tr>
-                    <tr>
-                        <th>DeviceFirmwareVersion :</th>
-                        <td colspan="2"><input type="text" ng-model="DeviceFirmwareVersion" value="" /></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <input type="submit" name="name" value="Post" ng-click="createDevice()" />
-                        </td>
-                        <td>
-                            <input type="submit" name="name" value="Cancel" ng-click="reset()" />
-                        </td>
+        <div ng-show="post">
+            <table cellpadding="5" cellspacing="5" align="left" class="table table-bordered">
 
 
-                    </tr>
 
-                 
-                </table>
+                <tr>
+                    <th>DeviceId :</th>
+                    <td colspan="2"><input type="text" ng-model="DeviceId" value="" /></td>
+                </tr>
+
+                <tr>
+                    <th>DeviceKey :</th>
+                    <td colspan="2"><input type="text" ng-model="DeviceKey" value="" /></td>
+                </tr>
+                <tr>
+                    <th>IOTHubEndpoint :</th>
+                    <td colspan="2"><input type="text" ng-model="IOTHubEndpoint" value="" /></td>
+                </tr>
+                <tr>
+                    <th>SerialNumber :</th>
+                    <td colspan="2"><input type="text" ng-model="SerialNumber" value="" /></td>
+                </tr>
+                <tr>
+                    <th>MACAddress :</th>
+                    <td colspan="2"><input type="text" ng-model="MACAddress" value="" /></td>
+                </tr>
+                <tr>
+                    <th>BLEUUID :</th>
+                    <td colspan="2"><input type="text" ng-model="BLEUUID" value="" /></td>
+                </tr>
+                <tr>
+                    <th>AccountID :</th>
+                    <td colspan="2"><input type="text" ng-model="AccountID" value="" /></td>
+                </tr>
+                <tr>
+                    <th>SystemID :</th>
+                    <td colspan="2"><input type="text" ng-model="SystemID" value="" /></td>
+                </tr>
+                <tr>
+                    <th>ConfigurationStoreURL :</th>
+                    <td colspan="2"><input type="text" ng-model="ConfigurationStoreURL" value="" /></td>
+                </tr>
+                <tr>
+                    <th>Lastupdatedconfiguration :</th>
+                    <td colspan="2"><input type="text" ng-model="Lastupdatedconfiguration" value="" /></td>
+                </tr>
+                <tr>
+                    <th>PSK :</th>
+                    <td colspan="2"><input type="text" ng-model="psk" value="" /></td>
+                </tr>
+                <tr>
+                    <th>DeviceFirmwareVersion :</th>
+                    <td colspan="2"><input type="text" ng-model="DeviceFirmwareVersion" value="" /></td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="submit" name="name" class="button" value="Post" ng-click="createDevice()" />
+                    </td>
+                    <td>
+                        <input type="submit" name="name" class="button" value="Cancel" ng-click="reset()" />
+                    </td>
 
 
-                   
-            </div>
-          
+                </tr>
+
+
+            </table>
+
 
 
         </div>
+
+
+
+    </div>
+    </body>
