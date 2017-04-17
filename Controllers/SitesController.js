@@ -7,7 +7,7 @@ var SitesController = function (uriFactory, $scope, $location, $cookieStore, api
     $scope.list = false;
     $scope.getAllSites = function () {
         $scope.Systems = {};
-        alert('hi');
+       
         console.log(uriFactory.getToken);
         console.log('inside getAllSites');
         loginService.doLogin(uriFactory.getToken).then(function (res) {
@@ -32,20 +32,32 @@ var SitesController = function (uriFactory, $scope, $location, $cookieStore, api
                         Account_Name: value.account_Name,
                         Site_LatLng: value.site_LatLng
                     });
-                    //console.log($scope.RetrievedData[0].Site_ID);
+                   
                 });
             }, function () {
-
+                ngToast.create({
+                    className: 'success',
+                    content: '<p>Login Successful</p>',
+                    dismissOnTimeout: true,
+                    timeout: 4000,
+                    dismissOnClick: true
+                });
             });
         }, function () {
-            $location.path('/Home');
+            ngToast.create({
+                className: 'warning',
+                content: '<p>Oops!!! Something went wrong! please try again after sometime</p>',
+                dismissOnTimeout: true,
+                timeout: 4000,
+                dismissOnClick: true
+            });
         });
     }
 
     $scope.postClicked = function () {
         $scope.post = true;
         $scope.RetrievedSystems = [];
-
+        $scope.RetrievedAccounts = [];
 
         $scope.id = "";
         $scope.Site_Name = "";
@@ -64,31 +76,56 @@ var SitesController = function (uriFactory, $scope, $location, $cookieStore, api
         $scope.Account_Name = "";
         $scope.Site_LatLng = "";
 
-        apiDispatcher.getAll(uriFactory.getAllSystems).then(function (response) {
+        apiDispatcher.getAll(uriFactory.getAllAccounts).then(function (response) {
             angular.forEach(response.data, function (value, key) {
-                //if(value.account_ID == $cookieStore.get('AccountId')){
-                $scope.RetrievedSystems.push({
-                    systemId: value.id,
+                
+                $scope.RetrievedAccounts.push({
+                    accountId: value.id,
+                   
                     isChecked: false
                 });
-                //}
-                //else {
-                //    $scope.RetrievedSites.push({
-                //        siteId: value.id,
-                //        isChecked: false
-                //    });
-                //}
+           
             });
 
-        }, function () { });
-        console.log($scope.RetrievedSystems);
+        }, function () {
+            ngToast.create({
+                className: 'warning',
+                content: '<p>Oops!!! Something went wrong! please try again after sometime</p>',
+                dismissOnTimeout: true,
+                timeout: 4000,
+                dismissOnClick: true
+            });
+        });
+       
+    
+        apiDispatcher.getAll(uriFactory.getAllSystems).then(function (response) {
+            angular.forEach(response.data, function (value, key) {
+               
+                $scope.RetrievedSystems.push({
+                    systemId: value.id,
+                    devices: value.Devices,
+                    isChecked: false
+                });
+            
+            });
+
+        }, function () {
+            ngToast.create({
+                className: 'warning',
+                content: '<p>Oops!!! Something went wrong! please try again after sometime</p>',
+                dismissOnTimeout: true,
+                timeout: 4000,
+                dismissOnClick: true
+            });
+        });
+        
     }
 
     $scope.updateClicked = function () {
         $scope.update = true;
         for (var i = 1; i < 13; i++) {
             document.getElementById("rem" + i).removeAttribute("disabled");
-            //document.getElementById("rem").removeAttribute("disabled");
+           
         }
 
         $scope.RetrievedSystems = [];
@@ -97,17 +134,27 @@ var SitesController = function (uriFactory, $scope, $location, $cookieStore, api
                 if (value.site_ID == $cookieStore.get('SiteId')) {
                     $scope.RetrievedSystems.push({
                         systemId: value.id,
+                        devices: value.Devices,
                         isChecked: true
                     });
                 }
                 else {
                     $scope.RetrievedSystems.push({
                         systemId: value.id,
+                        devices: value.Devices,
                         isChecked: false
                     });
                 }
             });
-        }, function () { });
+        }, function () {
+            ngToast.create({
+                className: 'warning',
+                content: '<p>Oops!!! Something went wrong! please try again after sometime</p>',
+                dismissOnTimeout: true,
+                timeout: 4000,
+                dismissOnClick: true
+            });
+        });
     }
 
     $scope.deleteClicked = function () {
@@ -123,7 +170,7 @@ var SitesController = function (uriFactory, $scope, $location, $cookieStore, api
     $scope.showSite = function (index) {
         //$location.path('/Accounts');
         $cookieStore.put('SiteId', $scope.RetrievedData[index].id);
-        console.log($scope.RetrievedData[index]);
+        
 
         $scope.RetrievedSite = $scope.RetrievedData[index];
         $scope.id = $scope.RetrievedSite.id;
@@ -148,10 +195,8 @@ var SitesController = function (uriFactory, $scope, $location, $cookieStore, api
     $scope.getSitetById = function () {
         $scope.RetrievedSite = [];
         apiDispatcher.getById(uriFactory.getSiteById + $cookieStore.get('SiteId')).then(function (res) {
-            console.log('inside getSite');
-            console.log(res);
-            console.log(uriFactory.getSiteById + $cookieStore.get('SiteId'));
-            console.log(res);
+           
+            
             var value = res.data;
             $scope.RetrievedSite.push({
                 id: value.id,
@@ -172,10 +217,16 @@ var SitesController = function (uriFactory, $scope, $location, $cookieStore, api
             });
 
         }, function () {
-
+            ngToast.create({
+                className: 'warning',
+                content: '<p>Oops!!! Something went wrong! please try again after sometime</p>',
+                dismissOnTimeout: true,
+                timeout: 4000,
+                dismissOnClick: true
+            });
         });
 
-        console.log($scope.RetrievedSite);
+       
     }
 
     $scope.reset = function () {
@@ -188,14 +239,16 @@ var SitesController = function (uriFactory, $scope, $location, $cookieStore, api
 
     $scope.createSite = function () {
         console.log($scope.RetrievedSystems);
+       
         var selected_Systems = [];
         angular.forEach($scope.RetrievedSystems, function (value, key) {
             if (value.isChecked) {
-                selected_Systems.push(value.systemId);
+                selected_Systems.push({ systemId: value.systemId, devices: value.devices });
+                
             }
+
         })
-        console.log(selected_Systems);
-        console.log($scope.System_ID);
+       
         var data = {
             id: $scope.id,
             site_Name: $scope.Site_Name,
@@ -212,7 +265,8 @@ var SitesController = function (uriFactory, $scope, $location, $cookieStore, api
             site_Image: $scope.Site_Image,
             account_ID: $scope.Account_ID,
             account_Name: $scope.Account_Name,
-            site_LatLng: $scope.Site_LatLng
+            site_LatLng: $scope.Site_LatLng,
+            systems: selected_Systems
         };
         apiDispatcher.postData(uriFactory.createSite, data).then(function (res) {
             ngToast.create({
@@ -237,8 +291,10 @@ var SitesController = function (uriFactory, $scope, $location, $cookieStore, api
         var selected_Systems = [];
         angular.forEach($scope.RetrievedSystems, function (value, key) {
             if (value.isChecked) {
-                selected_Systems.push(value.systemId);
+                selected_Systems.push({ systemId: value.systemId, devices: value.devices });
+
             }
+
         })
         var data = {
             id: $scope.id,
@@ -256,20 +312,45 @@ var SitesController = function (uriFactory, $scope, $location, $cookieStore, api
             site_Image: $scope.Site_Image,
             account_ID: $scope.Account_ID,
             account_Name: $scope.Account_Name,
-            site_LatLng: $scope.Site_LatLng
+            site_LatLng: $scope.Site_LatLng,
+            systems: selected_Systems
         };
         apiDispatcher.update(uriFactory.updateSite, data).then(function (res) {
-
+            ngToast.create({
+                className: 'success',
+                content: '<p>Site Updated Successfully</p>',
+                dismissOnTimeout: true,
+                timeout: 4000,
+                dismissOnClick: true
+            });
         }, function () {
-
+            ngToast.create({
+                className: 'danger',
+                content: '<p>Oops!!! Update Failed! Change a few things and try again</p>',
+                dismissOnTimeout: true,
+                timeout: 4000,
+                dismissOnClick: true
+            });
         });
     }
 
     $scope.deleteSite = function () {
         apiDispatcher.deleteById(uriFactory.deleteSite + $cookieStore.get('SiteId')).then(function (res) {
-
+            ngToast.create({
+                className: 'success',
+                content: '<p>Site Deleted Successfully</p>',
+                dismissOnTimeout: true,
+                timeout: 4000,
+                dismissOnClick: true
+            });
         }, function (res) {
-
+            ngToast.create({
+                className: 'danger',
+                content: '<p>Oops!!! Site cannot be deleted</p>',
+                dismissOnTimeout: true,
+                timeout: 4000,
+                dismissOnClick: true
+            });
         });
     }
 
@@ -282,4 +363,4 @@ var SitesController = function (uriFactory, $scope, $location, $cookieStore, api
     }
 }
 
-app.controller('AccountController', ['uriFactory', '$scope', '$location', '$cookieStore', 'apiDispatcher', 'loginService', 'ngToast', SiteController]);
+app.controller('SitesController', ['uriFactory', '$scope', '$location', '$cookieStore', 'apiDispatcher', 'loginService', 'ngToast', SitesController]);

@@ -3,7 +3,9 @@
     .multiselect {
         width: 200px;
     }
-
+    th {
+        text-align: left;
+    }
     .selectBox {
         position: relative;
     }
@@ -33,112 +35,150 @@
         .listing:hover {
             background-color: #1e90ff;
         }
+        .button {
+        display: inline-block;
+        margin: 0 auto;
+        -webkit-border-radius: 10px;
+        -webkit-box-shadow: 0px 3px rgba(128,128,128,1), /* gradient effects */
+        0px 4px rgba(118,118,118,1), 0px 5px rgba(108,108,108,1), 0px 6px rgba(98,98,98,1), 0px 7px rgba(88,88,88,1), 0px 8px rgba(78,78,78,1), 0px 14px 6px -1px rgba(128,128,128,1); /* shadow */
+        -webkit-transition: -webkit-box-shadow .1s ease-in-out;
+    }
+
+        .button span {
+            background-color: #E8E8E8;
+            background-image:
+            /* gloss gradient */
+            -webkit-gradient( linear, left bottom, left top, color-stop(50%,rgba(255,255,255,0)), color-stop(50%,rgba(255,255,255,0.3)), color-stop(100%,rgba(255,255,255,0.2))),
+            /* dark outside gradient */
+            -webkit-gradient( linear, left top, right top, color-stop(0%,rgba(210,210,210,0.3)), color-stop(20%,rgba(210,210,210,0)), color-stop(80%,rgba(210,210,210,0)), color-stop(100%,rgba(210,210,210,0.3))),
+            /* light inner gradient */
+            -webkit-gradient( linear, left top, right top, color-stop(0%,rgba(255,255,255,0)), color-stop(20%,rgba(255,255,255,0.5)), color-stop(80%,rgba(255,255,255,0.5)), color-stop(100%,rgba(255,255,255,0))),
+            /* diagonal line pattern */
+            -webkit-gradient( linear, 0% 100%, 100% 0%, color-stop(0%,rgba(255,255,255,0)), color-stop(40%,rgba(255,255,255,0)), color-stop(40%,#D2D2D1), color-stop(60%,#D2D2D1), color-stop(60%,rgba(255,255,255,0)), color-stop(100%,rgba(255,255,255,0)));
+            -webkit-box-shadow: 0px -1px #fff, /* top highlight */
+            0px 1px 1px #FFFFFF; /* bottom edge */
+            -webkit-background-size: 100%, 100%, 100%, 4px 4px;
+            -webkit-border-radius: 10px;
+            -webkit-transition: -webkit-transform .1s ease-in-out;
+            display: inline-block;
+            padding: 10px 40px 10px 40px;
+            color: #3A474D;
+            text-transform: uppercase;
+            font-family: 'TradeGothicLTStd-BdCn20','PT Sans Narrow';
+            font-weight: 700;
+            font-size: 32px;
+            text-shadow: 0px 1px #fff, 0px -1px #262F33;
+        }
+
+            .button span:hover {
+                color: #AEBF3B;
+                text-shadow: 0px -1px #97A63A;
+                cursor: pointer;
+            }
+
+        .button:active {
+            -webkit-box-shadow: 0px 3px rgba(128,128,128,1), 0px 4px rgba(118,118,118,1), 0px 5px rgba(108,108,108,1), 0px 6px rgba(98,98,98,1), 0px 7px rgba(88,88,88,1), 0px 8px rgba(78,78,78,1), 0px 10px 2px 0px rgba(128,128,128,.6); /* shadow */
+        }
+
+            .button:active span {
+                -webkit-transform: translate(0, 5px); /* depth of button press */
+            }
+
+        .button span:after {
+            content: ">";
+            display: block;
+            width: 10px;
+            height: 10px;
+            position: absolute;
+            right: 14px;
+            top: 12px;
+            font-family: 'Cabin';
+            font-weight: 700;
+            color: #AEBF3B;
+            text-shadow: 0px 1px #fff, 0px -1px #97A63A;
+            font-size: 26px;
+        }
 </style>
+<body>
+    <toast style="position:absolute;right:5px"></toast>
+    <div>
+        <div ng-init="getAllConfigs()">
+            <h2>Configuration Id</h2>
 
-<div>
-    <div ng-init="getAllConfigs()">
-        <h2>Configuration Id</h2>
+            <p ng-repeat="data in RetrievedData">
 
-        <p ng-repeat="data in RetrievedData">
-
-            <a ng-click="showAccount($index)">
-                {{data.id}}
-            </a>
+                <a ng-click="showAccount($index)">
+                    {{data.id}}
+                </a>
 
 
 
 
-        </p>
+            </p>
+        </div>
+
+        <center>
+            <div ng-hide="post">
+                <h2></h2>
+                <p>
+
+                    <label>Configuration ID : </label>{{id}}
+                    <br />
+                    <br />
+                    <label>Device ID : </label><input type="text" ng-model="Device_Name" value="" />
+                    <br />
+                    <textarea ng-model="Config_Data" style="height:100px;width:300px"></textarea>
+                    
+
+                    <br />
+                    <br />
+                    <div ng-hide="update">
+                        <input type="submit" name="name" class="button" value="CREATE" ng-click="postClicked()" />
+                        <input type="submit" name="name" class="button" value="UPDATE" ng-click="updateClicked()" />
+                        <input type="submit" name="name" class="button" value="DELETE" ng-click="deleteAccount()" />
+                    </div>
+                    <div ng-show="update">
+                        <input type="submit" name="name" class="button" value="Post" ng-click="updateAccount()" />
+                        <input type="submit" name="name" class="button" value="Cancel" ng-click="reset()" />
+                    </div>
+
+
+
+
+                </p>
+
+
+
+            </div>
+            <div ng-show="post">
+                <h2></h2>
+                <p>
+
+                    <label>Configuration ID : </label>{{id}}
+                    <br />
+                    <br />
+                    <label>Device ID : </label><input type="text" ng-model="Device_Name" value="" />
+                    <br />
+                    <textarea ng-model="Config_Data" style="height:100px;width:300px"></textarea>
+
+                    <br />
+                    <br />
+                    <div>
+                        <input type="submit" name="name" class="button" value="Post" ng-click="createAccount()" />
+                        <input type="submit" name="name" class="button" value="Cancel" ng-click="reset()" />
+
+                    </div>
+
+
+
+
+                </p>
+
+
+
+            </div>
+        </center>
+
+
     </div>
-
-    <center>
-        <div ng-hide="post">
-            <h2></h2>
-            <p>
-
-                <label>Configuration ID : </label>{{id}}
-                <br />
-                <br />
-                <label>Device ID : </label><input type="text" ng-model="Device_Name" value="" />
-                <br />
-                <textarea ng-model="Config_Data" style="height:100px;width:300px"></textarea>
-                <!--<label>Corporate_ShortName : </label><input type="text" ng-model="Corporate_ShortName" value="" />
-                <br />
-                <label>Corporate_TradeName : </label><input type="text" ng-model="Corporate_TradeName" value="" />
-                <br />
-                <label>Corporate_Address_Street : </label><input type="text" ng-model="Corporate_Address_Street" value="" />
-                <br />
-                <label>Corporate_Address_City : </label><input type="text" ng-model="Corporate_Address_City" value="" />
-                <br />
-                <label>Corporate_Address_State : </label><input type="text" ng-model="Corporate_Address_State" value="" />
-                <br />
-                <label>Corporate_Address_Zip : </label><input type="text" ng-model="Corporate_Address_Zip" value="" />
-                <br />
-                <label>Corporate_Address_Country : </label><input type="text" ng-model="Corporate_Address_Country" value="" />
-                <br />
-                <label>Corporate_Phone_1 : </label><input type="text" ng-model="Corporate_Phone_1" value="" />
-                <br />
-                <label>Corporate_Phone_2 : </label><input type="text" ng-model="Corporate_Phone_2" value="" />
-                <br />
-                <label>Corporate_Phone_3 : </label><input type="text" ng-model="Corporate_Phone_3" value="" />
-                <br />
-                <label>Corporate_ID : </label><input type="text" ng-model="Corporate_ID" value="" />
-                <br />-->
-
-                
-
-
-           
-
-
-                <br />
-                <br />
-                <div ng-hide="update">
-                    <input type="submit" name="name" value="CREATE" ng-click="postClicked()" />
-                    <input type="submit" name="name" value="UPDATE" ng-click="updateClicked()" />
-                    <input type="submit" name="name" value="DELETE" ng-click="deleteAccount()" />
-                </div>
-                <div ng-show="update">
-                    <input type="submit" name="name" value="Post" ng-click="updateAccount()" />
-                    <input type="submit" name="name" value="Cancel" ng-click="reset()" />
-                </div>
-
-
-
-
-            </p>
-
-
-
-        </div>
-        <div ng-show="post">
-            <h2></h2>
-            <p>
-
-                <label>Configuration ID : </label>{{id}}
-                <br />
-                <br />
-                <label>Device ID : </label><input type="text" ng-model="Device_Name" value="" />
-                <br />
-                <textarea ng-model="Config_Data" style="height:100px;width:300px"></textarea>
-
-                <br />
-                <br />
-                <div>
-                    <input type="submit" name="name" value="Post" ng-click="createAccount()" />
-                    <input type="submit" name="name" value="Cancel" ng-click="reset()" />
-
-                </div>
-
-
-
-
-            </p>
-
-
-
-        </div>
-    </center>
-
-
-</div>
+    </body>

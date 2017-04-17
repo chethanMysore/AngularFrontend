@@ -1,8 +1,9 @@
 
 
 app.factory('loginService', ['$cookieStore', '$cookies', '$rootScope', 'apiDispatcher', '$http', '$q', function ($cookieStore, $cookies, $rootScope, apiDispatcher, $http, $q) {
-	var deferred = $q.defer();
-		var login = function(uri){
+	
+    var login = function (uri) {
+        var deferred = $q.defer();
 			var data = "&grant_type=password" + "&username=demo@ecolab.com" + "&password=ecolab123" + "&client_id=EcoIceCloud" + "&client_secret=ramendra";
 			$http({
 				method: 'POST',

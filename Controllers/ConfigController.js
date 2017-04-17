@@ -1,14 +1,14 @@
 'use strict';
 
-var ConfigController = function (uriFactory, $scope, $location, $cookieStore, apiDispatcher, loginService) {
+var ConfigController = function (uriFactory, $scope, $location, $cookieStore, apiDispatcher, loginService,ngToast) {
     $scope.post = false;
     $scope.update = false;
     $scope.delete = false;
   
     $scope.getAllConfigs = function () {
       
-        alert('hi');
-        console.log(uriFactory.getToken);
+       
+       
         loginService.doLogin(uriFactory.getToken).then(function (res) {
             $scope.RetrievedData = [];
             apiDispatcher.getAll(uriFactory.getAllConfigurations).then(function (res) {
@@ -19,10 +19,22 @@ var ConfigController = function (uriFactory, $scope, $location, $cookieStore, ap
 
                 });
             }, function () {
-
+                ngToast.create({
+                    className: 'success',
+                    content: '<p>Login Successful</p>',
+                    dismissOnTimeout: true,
+                    timeout: 4000,
+                    dismissOnClick: true
+                });
             });
         }, function () {
-            $location.path('/Home');
+            ngToast.create({
+                className: 'warning',
+                content: '<p>Oops!!! Something went wrong! please try again after sometime</p>',
+                dismissOnTimeout: true,
+                timeout: 4000,
+                dismissOnClick: true
+            });
         });
     }
 
@@ -45,38 +57,61 @@ var ConfigController = function (uriFactory, $scope, $location, $cookieStore, ap
 
     $scope.showAccount = function (index) {      
         $cookieStore.put('ConfigId', $scope.RetrievedData[index].id);
-        console.log($scope.RetrievedData[index]);
+       
 
-        $scope.RetrievedAccount = $scope.RetrievedData[index];
+        $scope.RetrievedConfig = $scope.RetrievedData[index];
         //Populate models with RetrievedAccount data here
        
         
     }
 
     $scope.getConfigById = function () {
-        $scope.RetrievedAccount = [];
+        $scope.RetrievedConfig = [];
         apiDispatcher.getById(uriFactory.getAccountById + $cookieStore.get('AccountId')).then(function (res) {
             
             var value = res.data;
-            $scope.RetrievedAccount.push({
+            $scope.RetrievedConfig.push({
                 //Add response data here
             });
 
         }, function () {
-
+            ngToast.create({
+                className: 'warning',
+                content: '<p>Oops!!! Something went wrong! please try again after sometime</p>',
+                dismissOnTimeout: true,
+                timeout: 4000,
+                dismissOnClick: true
+            });
         });      
     }
 
-    $scope.reset = function () { }
+    $scope.reset = function () {
+        $scope.post = false;
+        $scope.update = false;
+        $scope.delete = false;
+       
+    }
 
     $scope.createAccount = function () {
         var data = {
             //Add json data here
         };
         apiDispatcher.postData(uriFactory.createAccount, data).then(function (res) {
-
+            ngToast.create({
+                className: 'success',
+                content: '<p>Config Added Successfully</p>',
+                dismissOnTimeout: true,
+                timeout: 2000,
+                dismissOnClick: true
+            });
         }, function () {
-
+            ngToast.create({
+                className: 'warning',
+                content: '<p>Config Adding Failed! Please try again later</p>',
+                dismissOnTimeout: true,
+                timeout: 2000,
+                dismissOnClick: true
+            });
         });
     }
 
@@ -85,11 +120,23 @@ var ConfigController = function (uriFactory, $scope, $location, $cookieStore, ap
            //Add updation data here
         };
         apiDispatcher.update(uriFactory.updateAccount + $cookieStore.get('ConfigId'), data).then(function (res) {
-
+            ngToast.create({
+                className: 'success',
+                content: '<p>Config Updated Successfully</p>',
+                dismissOnTimeout: true,
+                timeout: 4000,
+                dismissOnClick: true
+            });
         }, function () {
-
+            ngToast.create({
+                className: 'danger',
+                content: '<p>Oops!!! Update Failed! Change a few things and try again</p>',
+                dismissOnTimeout: true,
+                timeout: 4000,
+                dismissOnClick: true
+            });
         });
     }
 }
 
-app.controller('ConfigController', ['uriFactory', '$scope', '$location', '$cookieStore', 'apiDispatcher', 'loginService', ConfigController]);
+app.controller('ConfigController', ['uriFactory', '$scope', '$location', '$cookieStore', 'apiDispatcher', 'loginService', 'ngToast', ConfigController]);

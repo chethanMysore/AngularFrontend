@@ -8,8 +8,7 @@ var AccountController = function (uriFactory, $scope, $location, $cookieStore, a
     $scope.getAllAccounts = function () {
         $scope.Sites = {};
        
-        console.log(uriFactory.getToken);
-        console.log('inside getAllAccounts');
+        
         loginService.doLogin(uriFactory.getToken).then(function (res) {
             $scope.RetrievedData = [];
             apiDispatcher.getAll(uriFactory.getAllAccounts).then(function (res) {
@@ -144,7 +143,7 @@ var AccountController = function (uriFactory, $scope, $location, $cookieStore, a
     $scope.showAccount = function (index) {
         //$location.path('/Accounts');
         $cookieStore.put('AccountId', $scope.RetrievedData[index].id);
-        console.log($scope.RetrievedData[index]);
+
 
         $scope.RetrievedAccount = $scope.RetrievedData[index];
         $scope.id = $scope.RetrievedAccount.id;
@@ -168,10 +167,7 @@ var AccountController = function (uriFactory, $scope, $location, $cookieStore, a
     $scope.getAccountById = function () {
         $scope.RetrievedAccount = [];
         apiDispatcher.getById(uriFactory.getAccountById + $cookieStore.get('AccountId')).then(function (res) {
-            console.log('inside getAccount');
-            console.log(res);
-            console.log(uriFactory.getAccountById + $cookieStore.get('AccountId'));
-            console.log(res);
+            
             var value = res.data;
             $scope.RetrievedAccount.push({
                 id: value.id,
@@ -213,15 +209,14 @@ var AccountController = function (uriFactory, $scope, $location, $cookieStore, a
     }
 
     $scope.createAccount = function () {
-        console.log($scope.RetrievedSites);
+       
         var selected_Sites = [];
         angular.forEach($scope.RetrievedSites, function (value, key) {
             if (value.isChecked) {
                 selected_Sites.push(value.siteId);
             }
         })
-        console.log(selected_Sites);
-        console.log($scope.Site_ID);
+       
         var data = {
             id: $scope.id,
             corporate_Name: $scope.Corporate_Name,

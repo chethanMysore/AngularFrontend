@@ -1,8 +1,8 @@
 
 
-    var HomeController = function ($scope, $location) {
+    var HomeController = function ($scope, $location,ngToast) {
         $scope.AccountPage = function () {
-            alert('hi');
+           
             $location.path('/Account');
         }
 
@@ -25,16 +25,17 @@
         $scope.FirmwarePage = function () {
             $location.path('/Firmware');
         }
+      
     }
-    app.controller('HomeController', HomeController);
-
+    app.controller('HomeController',['$scope', '$location','ngToast', HomeController]);
+    
     app.config(function ($routeProvider, $httpProvider) {
-        $routeProvider.when('/Account', { templateUrl: 'Account.html', controller: 'AccountController' })
-                      .when('/Site', { templateUrl: 'Sites.html', controller: 'SiteController' })
-                      .when('/System', { templateUrl: 'Systems.html', controller: 'SystemsController' })
-                      .when('/Device', { templateUrl: 'Devices.html', controller: 'DevicesController' })
-                      .when('/Config', { templateUrl: 'Config.html', controller: 'ConfigController' })
-                      .when('/Firmware', { templateUrl: 'Systems.html', controller: 'FirmwareController' })
+        $routeProvider.when('/Account', { templateUrl: '../Views/Account.html', controller: 'AccountController' })
+                      .when('/Site', { templateUrl: '../Views/Site.html', controller: 'SitesController' })
+                      .when('/System', { templateUrl: '../Views/Systems.html', controller: 'SystemsController' })
+                      .when('/Device', { templateUrl: '../Views/Device.html', controller: 'DeviceIdentityController' })
+                      .when('/Config', { templateUrl: '../Views/Config.html', controller: 'ConfigController' })
+                      .when('/Firmware', { templateUrl: '../Views/Firmware.html', controller: 'FirmwareController' })
                       .otherwise({ redirectTo: '/Home' })
     }
 );
