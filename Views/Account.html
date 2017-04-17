@@ -1,364 +1,259 @@
 ﻿
 <style>
     .multiselect {
-  width: 200px;
+        width: 200px;
+    }
+
+    .selectBox {
+        position: relative;
+    }
+
+        .selectBox select {
+            width: 100%;
+            font-weight: bold;
+        }
+
+    .overSelect {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+    }
+
+    checkboxes {
+        display: none;
+        border: 1px #dadada solid;
+    }
+
+    .listing {
+        display: block;
+    }
+
+        .listing:hover {
+            background-color: #1e90ff;
+        }
+
+    #table {
+        background-color:whitesmoke;
+        border-color:black;
+        border-width:thick;
+        border-style:double;
+       
+    }
+    table {
+        background-color:whitesmoke;
+        border-color:black;
+        border-width:medium;
+        border-style:double;
+        
+    }
+    .textbox {
+    background: #CDC1C5;
+    color: black;
+    width: 200px;
+    padding: 6px 15px 6px 35px;
+    border-radius: 20px;
+    box-shadow: 0 1px 0 #ccc inset;
+    transition: 500ms all ease;
+    outline: 0;
+}
+ .textbox:hover {
+    width: 270px;
 }
 
-.selectBox {
-  position: relative;
-}
 
-.selectBox select {
-  width: 100%;
-  font-weight: bold;
-}
-
-.overSelect {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-}
-
-checkboxes {
-  display: none;
-  border: 1px #dadada solid;
-}
-
-.listing {
-  display: block;
-}
-
-.listing:hover {
-  background-color: #1e90ff;
-}
-table{
- 
-}
-th{
-    text-align: left
-}
-
+    th {
+        text-align: left;
+    }
 </style>
 
 
-    <div  ng-init="getAllAccounts()" style="width:200px">
-        <h2>Account Id</h2>
-        <table>
-            <tr ng-repeat ="data in RetrievedData">
-                <td ng-click="showAccount($index)"><a>{{data.id}}</a></td>
-            </tr>
-        </table>
-        
-       
-    </div>
+<div ng-init="getAllAccounts()" style="width:200px">
+    <h2>Account Id</h2>
+    <table>
+        <tr ng-repeat="data in RetrievedData">
+            <td ng-click="showAccount($index)"><a>{{data.id}}</a></td>
+        </tr>
+    </table>
+
+
+</div>
 <div style="position:absolute;left:200px;top:20px">
     <svg width="20" height="1000">
         <rect x="0" y="0" width="1" height="2000"
-              style="fill:rgb(0,0,255);stroke-width:1;stroke:rgb(24, 167, 249)" />
+              style="fill:rgb(0,0,255);stroke-width:1;stroke:rgb(139, 131, 134)" />
         Sorry, your browser does not support inline SVG.
     </svg>
 </div>
-    <div style="position:absolute;top:20px;left:300px" ng-show="RetrievedAccount">
-        <div ng-hide="post">
-           
-            <table cellpadding="5" cellspacing="5" align="left" class="table table-bordered">
-                <tr>
-                    <th>Property Name</th>
-                    <th colspan="2">Property Value</th>
-                  
-                </tr>
-                <tr>
-                    <th>Account ID</th>
-                    <td colspan="2">{{id}}</td>
-                </tr>
-                <tr>
-                    <th>Corporate_Name</th>
-                    <td colspan="2"><input type="text" ng-model="Corporate_Name" value="" disabled /></td>
-                </tr>
-                <tr>
-                    <th>Corporate_ShortName</th>
-                    <td colspan="2"><input type="text" ng-model="Corporate_ShortName" value="" disabled /></td>
-                </tr>
-                <tr>
-                    <th>Corporate_TradeName</th>
-                    <td colspan="2"><input type="text" ng-model="Corporate_TradeName" value="" disabled /></td>
-                </tr>
-                <tr>
-                    <th>Corporate_Address_Street</th>
-                    <td colspan="2"><input type="text" ng-model="Corporate_Address_Street" value="" disabled /></td>
-                </tr>
-                <tr>
-                    <th>Corporate_Address_City</th>
-                    <td colspan="2"><input type="text" ng-model="Corporate_Address_City" value="" disabled /></td>
-                </tr>
-                <tr>
-                    <th>Corporate_Address_State</th>
-                    <td colspan="2"><input type="text" ng-model="Corporate_Address_State" value="" disabled /></td>
-                </tr>
-                <tr>
-                    <th>Corporate_Address_Zip</th>
-                    <td colspan="2"><input type="text" ng-model="Corporate_Address_Zip" value="" disabled /></td>
-                </tr>
-                <tr>
-                    <th>Corporate_Address_Country</th>
-                    <td colspan="2"><input type="text" ng-model="Corporate_Address_Country" value="" disabled /></td>
-                </tr>
-                <tr>
-                    <th>Corporate_Phone_1</th>
-                    <td colspan="2"><input type="text" ng-model="Corporate_Phone_1" value="" disabled /></td>
-                </tr>
-                <tr>
-                    <th>Corporate_Phone_2</th>
-                    <td colspan="2"><input type="text" ng-model="Corporate_Phone_2" value="" disabled /></td>
-                </tr>
-                <tr>
-                    <th>Corporate_Phone_3</th>
-                    <td colspan="2"><input type="text" ng-model="Corporate_Phone_3" value="" disabled /></td>
-                </tr>
-                <tr>
-                    <th>Corporate_ID</th>
-                    <td colspan="2"><input type="text" ng-model="Corporate_ID" value="" disabled /></td>
-                </tr>
-                <tr>
-                    <th>Site ID</th>
-                    <td ng-hide="update"><select ng-model="Site_ID" ng-options="data for data in Site_ID " colspan="2"></select></td>
-                    <td ng-show="update" colspan="2">
-                        <select>
-                            <option ng-click="showCheckboxes()">Select an option</option>
-                        </select>
-                        <br />
-                        <label for="one" class="listing" ng-repeat="data in Site_ID" ng-show="list">
-                            <input type="checkbox" id="one" />{{data}}
-                        </label>
-                    </td>
-                </tr>
+<div style="position:absolute;top:20px;left:300px" ng-show="RetrievedAccount">
 
-                <tr ng-hide="update">
-                    <td><input type="submit" name="name" value="CREATE" ng-click="postClicked()" /></td>
-                    <td><input type="submit" name="name" value="UPDATE" ng-click="updateClicked()" /></td>
-                    <td><input type="submit" name="name" value="DELETE" ng-click="deleteAccount()" /></td>
-                </tr>
-                <tr ng-show="update">
-                    <td><input type="submit" name="name" value="Post" ng-click="updateAccount()" /></td>
-                    <td><input type="submit" name="name" value="Cancel" ng-click="reset()" /></td>
-                </tr>
-            </table>
+    <div ng-hide="post" class="table">
 
-                <!--<label>ACCOUNT ID : </label>{{id}}
-                <br />
-                <br />
-                <label>Corporate_Name : </label><input type="text" ng-model="Corporate_Name" value="" disabled />
-                <br />
-                <label>Corporate_ShortName : </label><input type="text" ng-model="Corporate_ShortName" value="" disabled />
-                <br />
-                <label>Corporate_TradeName : </label><input type="text" ng-model="Corporate_TradeName" value="" disabled />
-                <br />
-                <label>Corporate_Address_Street : </label><input type="text" ng-model="Corporate_Address_Street" value="" disabled />
-                <br />
-                <label>Corporate_Address_City : </label><input type="text" ng-model="Corporate_Address_City" value="" disabled />
-                <br />
-                <label>Corporate_Address_State : </label><input type="text" ng-model="Corporate_Address_State" value="" disabled />
-                <br />
-                <label>Corporate_Address_Zip : </label><input type="text" ng-model="Corporate_Address_Zip" value="" disabled />
-                <br />
-                <label>Corporate_Address_Country : </label><input type="text" ng-model="Corporate_Address_Country" value="" disabled />
-                <br />
-                <label>Corporate_Phone_1 : </label><input type="text" ng-model="Corporate_Phone_1" value="" disabled />
-                <br />
-                <label>Corporate_Phone_2 : </label><input type="text" ng-model="Corporate_Phone_2" value="" disabled />
-                <br />
-                <label>Corporate_Phone_3 : </label><input type="text" ng-model="Corporate_Phone_3" value="" disabled />
-                <br />
-                <label>Corporate_ID : </label><input type="text" ng-model="Corporate_ID" value="" disabled />
-                <br />-->
+        <table cellpadding="5" cellspacing="5" align="left" class="table table-bordered" id="table">
+            <tr>
+                <th>Property Name</th>
+                <th colspan="2">Property Value</th>
+            </tr>
+            <tr>
+                <th>Account ID</th>
+                <td colspan="2">{{id}}</td>
+            </tr>
+            <tr>
+                <th>Corporate_Name</th>
+                <td colspan="2"><input type="text" ng-model="Corporate_Name" value="" disabled class="textbox"/></td>
+            </tr>
+            <tr>
+                <th>Corporate_ShortName</th>
+                <td colspan="2"><input type="text" ng-model="Corporate_ShortName" value="" disabled class="textbox"/></td>
+            </tr>
+            <tr>
+                <th>Corporate_TradeName</th>
+                <td colspan="2"><input type="text" ng-model="Corporate_TradeName" value="" disabled class="textbox"/></td>
+            </tr>
+            <tr>
+                <th>Corporate_Address_Street</th>
+                <td colspan="2"><input type="text" ng-model="Corporate_Address_Street" value="" disabled class="textbox"/></td>
+            </tr>
+            <tr>
+                <th>Corporate_Address_City</th>
+                <td colspan="2"><input type="text" ng-model="Corporate_Address_City" value="" disabled class="textbox"/></td>
+            </tr>
+            <tr>
+                <th>Corporate_Address_State</th>
+                <td colspan="2"><input type="text" ng-model="Corporate_Address_State" value="" disabled class="textbox"/></td>
+            </tr>
+            <tr>
+                <th>Corporate_Address_Zip</th>
+                <td colspan="2"><input type="text" ng-model="Corporate_Address_Zip" value="" disabled class="textbox"/></td>
+            </tr>
+            <tr>
+                <th>Corporate_Address_Country</th>
+                <td colspan="2"><input type="text" ng-model="Corporate_Address_Country" value="" disabled class="textbox"/></td>
+            </tr>
+            <tr>
+                <th>Corporate_Phone_1</th>
+                <td colspan="2"><input type="text" ng-model="Corporate_Phone_1" value="" disabled class="textbox"/></td>
+            </tr>
+            <tr>
+                <th>Corporate_Phone_2</th>
+                <td colspan="2"><input type="text" ng-model="Corporate_Phone_2" value="" disabled class="textbox"/></td>
+            </tr>
+            <tr>
+                <th>Corporate_Phone_3</th>
+                <td colspan="2"><input type="text" ng-model="Corporate_Phone_3" value="" disabled class="textbox"/></td>
+            </tr>
+            <tr>
+                <th>Corporate_ID</th>
+                <td colspan="2"><input type="text" ng-model="Corporate_ID" value="" disabled class="textbox"/></td>
+            </tr>
+            <tr>
+                <th>Site ID</th>
+               
+                <td ng-show="update" colspan="2" ng-click="showCheckboxes()">
+                    <select class="textbox">
+                        <option >Select an option</option>
+                    </select>
+                    <br />
+                    <label for="one" class="listing" ng-repeat="data in Site_ID" ng-show="list">
+                        <input type="checkbox" id="one" />{{data}}
+                    </label>
+                </td>
+                <td ng-hide="update" colspan="2">
+                    <select ng-model="Site_ID" ng-options="data for data in Site_ID " colspan="2" class="textbox"></select>
+                </td>
+            </tr>
 
-                <!--<div ng-hide="update">
-                    <label>SITE ID</label><select ng-model="Site_ID" ng-options="data for data in Site_ID "></select>
-                </div>
-
-
-                <div class="multiselect" ng-show="update">
-                    <div class="selectBox" ng-click="showCheckboxes()">
-                        <select>
-                            <option>Select an option</option>
-                        </select>
-                        <div class="overSelect"></div>
-                    </div>
-                    <div ng-show="list">
-                        <label for="one" class="listing" ng-repeat="data in Site_ID">
-                            <input type="checkbox" id="one" />{{data}}
-                        </label>
-
-                    </div>
-                </div>
-
-
-                <br />
-                <br />-->
-                <!--<div ng-hide="update">
-                    <input type="submit" name="name" value="CREATE" ng-click="postClicked()" />
-                    <input type="submit" name="name" value="UPDATE" ng-click="updateClicked()" />
-                    <input type="submit" name="name" value="DELETE" ng-click="deleteAccount()" />
-                </div>
-                <div ng-show="update">
-                    <input type="submit" name="name" value="Post" ng-click="updateAccount()" />
-                    <input type="submit" name="name" value="Cancel" ng-click="reset()" />
-                </div>
-
-
-
-
-            </p>-->
-
-
-
-        </div>
-        <div ng-show="post">
-           
-            <!--<p>
-
-                <label>ACCOUNT ID : </label><input type="text" ng-model="id" value="" />
-                <br />
-                <br />
-                <label>Corporate_Name : </label><input type="text" ng-model="Corporate_Name" value="" />
-                <br />
-                <label>Corporate_ShortName : </label><input type="text" ng-model="Corporate_ShortName" value="" />
-                <br />
-                <label>Corporate_TradeName : </label><input type="text" ng-model="Corporate_TradeName" value="" />
-                <br />
-                <label>Corporate_Address_Street : </label><input type="text" ng-model="Corporate_Address_Street" value="" />
-                <br />
-                <label>Corporate_Address_City : </label><input type="text" ng-model="Corporate_Address_City" value="" />
-                <br />
-                <label>Corporate_Address_State : </label><input type="text" ng-model="Corporate_Address_State" value="" />
-                <br />
-                <label>Corporate_Address_Zip : </label><input type="text" ng-model="Corporate_Address_Zip" value="" />
-                <br />
-                <label>Corporate_Address_Country : </label><input type="text" ng-model="Corporate_Address_Country" value="" />
-                <br />
-                <label>Corporate_Phone_1 : </label><input type="text" ng-model="Corporate_Phone_1" value="" />
-                <br />
-                <label>Corporate_Phone_2 : </label><input type="text" ng-model="Corporate_Phone_2" value="" />
-                <br />
-                <label>Corporate_Phone_3 : </label><input type="text" ng-model="Corporate_Phone_3" value="" />
-                <br />
-                <label>Corporate_ID : </label><input type="text" ng-model="Corporate_ID" value="" />
-                <br />
-
-                <div class="multiselect">
-                    <div class="selectBox" ng-click="showCheckboxes()">
-                        <select>
-                            <option>Select an option</option>
-                        </select>
-                        <div class="overSelect"></div>
-                    </div>
-                    <div ng-show="list">
-                        <label for="one" class="listing" ng-repeat="data in RetrievedSites">
-                            <input type="checkbox" id="one" ng-model="RetrievedSites[$index].isChecked" ng-checked="RetrievedSites[$index].isChecked" />{{data.siteId}}
-                        </label>
-                    </div>
-                </div>-->
-                <!--<label>SITE ID</label><select ng-model="Site_ID" ng-options="data in Sites ">-->
-                <!--<option value="value">text</option>-->
-                <!--</select>-->
-
-
-                <!--<br />
-                <br />
-                <div>
-                    <input type="submit" name="name" value="Post" ng-click="createAccount()" />
-                    <input type="submit" name="name" value="Cancel" ng-click="reset()" />
-
-                </div>
-
-
-
-
-            </p>-->
-            <table cellpadding="5" cellspacing="5" align="left" class="table table-bordered">
-                <tr>
-                    <th>Property Name</th>
-                    <th colspan="2">Property Value</th>
-
-                </tr>
-                <tr>
-                    <th>Account ID</th>
-                    <td colspan="2"><input type="text" ng-model="id" value="" /></td>
-                </tr>
-                <tr>
-                    <th>Corporate_Name</th>
-                    <td colspan="2"><input type="text" ng-model="Corporate_Name" value="" /></td>
-                </tr>
-                <tr>
-                    <th>Corporate_ShortName</th>
-                    <td colspan="2"><input type="text" ng-model="Corporate_ShortName" value="" /></td>
-                </tr>
-                <tr>
-                    <th>Corporate_TradeName</th>
-                    <td colspan="2"><input type="text" ng-model="Corporate_TradeName" value="" /></td>
-                </tr>
-                <tr>
-                    <th>Corporate_Address_Street</th>
-                    <td colspan="2"><input type="text" ng-model="Corporate_Address_Street" value="" /></td>
-                </tr>
-                <tr>
-                    <th>Corporate_Address_City</th>
-                    <td colspan="2"><input type="text" ng-model="Corporate_Address_City" value="" /></td>
-                </tr>
-                <tr>
-                    <th>Corporate_Address_State</th>
-                    <td colspan="2"><input type="text" ng-model="Corporate_Address_State" value="" /></td>
-                </tr>
-                <tr>
-                    <th>Corporate_Address_Zip</th>
-                    <td colspan="2"><input type="text" ng-model="Corporate_Address_Zip" value="" /></td>
-                </tr>
-                <tr>
-                    <th>Corporate_Address_Country</th>
-                    <td colspan="2"><input type="text" ng-model="Corporate_Address_Country" value="" /></td>
-                </tr>
-                <tr>
-                    <th>Corporate_Phone_1</th>
-                    <td colspan="2"><input type="text" ng-model="Corporate_Phone_1" value="" /></td>
-                </tr>
-                <tr>
-                    <th>Corporate_Phone_2</th>
-                    <td colspan="2"><input type="text" ng-model="Corporate_Phone_2" value="" /></td>
-                </tr>
-                <tr>
-                    <th>Corporate_Phone_3</th>
-                    <td colspan="2"><input type="text" ng-model="Corporate_Phone_3" value="" /></td>
-                </tr>
-                <tr>
-                    <th>Corporate_ID</th>
-                    <td colspan="2"><input type="text" ng-model="Corporate_ID" value="" /></td>
-                </tr>
-                <tr>
-                    <th>Site ID</th>
-                    <td ng-hide="update"><select ng-model="Site_ID" ng-options="data for data in Site_ID " colspan="2"></select></td>
-                    <td ng-show="update" colspan="2">
-                        <select>
-                            <option ng-click="showCheckboxes()">Select an option</option>
-                        </select>
-                        <br />
-                        <label for="one" class="listing" ng-repeat="data in Site_ID" ng-show="list">
-                            <input type="checkbox" id="one" />{{data}}
-                        </label>
-                    </td>
-                </tr>
-
-              
-                <tr>
-                    <td><input type="submit" name="name" value="Post" ng-click="createAccount()" /></td>
-                    <td><input type="submit" name="name" value="Cancel" ng-click="reset()" /></td>
-                </tr>
-            </table>
-
-
-        </div>
+            <tr ng-hide="update">
+                <td><input type="submit" name="name" value="CREATE" ng-click="postClicked()" /></td>
+                <td><input type="submit" name="name" value="UPDATE" ng-click="updateClicked()" /></td>
+                <td><input type="submit" name="name" value="DELETE" ng-click="deleteAccount()" /></td>
+            </tr>
+            <tr ng-show="update">
+                <td><input type="submit" name="name" value="Post" ng-click="updateAccount()" /></td>
+                <td colspan="2"><input type="submit" name="name" value="Cancel" ng-click="reset()" /></td>
+            </tr>
+        </table>      
     </div>
+    <div ng-show="post">      
+        <table cellpadding="5" cellspacing="5" align="left" class="table table-bordered" id="table">
+            <tr>
+                <th>Property Name</th>
+                <th colspan="2">Property Value</th>
+
+            </tr>
+            <tr>
+                <th>Account ID</th>
+                <td colspan="2"><input type="text" ng-model="id" value="" class="textbox"/></td>
+            </tr>
+            <tr>
+                <th>Corporate_Name</th>
+                <td colspan="2"><input type="text" ng-model="Corporate_Name" value="" class="textbox"/></td>
+            </tr>
+            <tr>
+                <th>Corporate_ShortName</th>
+                <td colspan="2"><input type="text" ng-model="Corporate_ShortName" value="" class="textbox"/></td>
+            </tr>
+            <tr>
+                <th>Corporate_TradeName</th>
+                <td colspan="2"><input type="text" ng-model="Corporate_TradeName" value="" class="textbox"/></td>
+            </tr>
+            <tr>
+                <th>Corporate_Address_Street</th>
+                <td colspan="2"><input type="text" ng-model="Corporate_Address_Street" value="" class="textbox"/></td>
+            </tr>
+            <tr>
+                <th>Corporate_Address_City</th>
+                <td colspan="2"><input type="text" ng-model="Corporate_Address_City" value="" class="textbox"/></td>
+            </tr>
+            <tr>
+                <th>Corporate_Address_State</th>
+                <td colspan="2"><input type="text" ng-model="Corporate_Address_State" value="" class="textbox"/></td>
+            </tr>
+            <tr>
+                <th>Corporate_Address_Zip</th>
+                <td colspan="2"><input type="text" ng-model="Corporate_Address_Zip" value="" class="textbox"/></td>
+            </tr>
+            <tr>
+                <th>Corporate_Address_Country</th>
+                <td colspan="2"><input type="text" ng-model="Corporate_Address_Country" value="" class="textbox"/></td>
+            </tr>
+            <tr>
+                <th>Corporate_Phone_1</th>
+                <td colspan="2"><input type="text" ng-model="Corporate_Phone_1" value="" class="textbox"/></td>
+            </tr>
+            <tr>
+                <th>Corporate_Phone_2</th>
+                <td colspan="2"><input type="text" ng-model="Corporate_Phone_2" value="" class="textbox"/></td>
+            </tr>
+            <tr>
+                <th>Corporate_Phone_3</th>
+                <td colspan="2"><input type="text" ng-model="Corporate_Phone_3" value="" class="textbox"/></td>
+            </tr>
+            <tr>
+                <th>Corporate_ID</th>
+                <td colspan="2"><input type="text" ng-model="Corporate_ID" value="" class="textbox"/></td>
+            </tr>
+            <tr>
+                <th>Site ID</th>
+                
+                <td  colspan="2">
+                    <select class="textbox">
+                        <option ng-click="showCheckboxes()">Select an option</option>
+                    </select>
+                    <br />
+                    <label for="one" class="listing" ng-repeat="data in Site_ID" ng-show="list">
+                        <input type="checkbox" id="one" />{{data}}
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td><input type="submit" name="name" value="Post" ng-click="createAccount()" /></td>
+                <td colspan="2"><input type="submit" name="name" value="Cancel" ng-click="reset()" /></td>
+            </tr>
+        </table>
+    </div>
+</div>
 
 
 
