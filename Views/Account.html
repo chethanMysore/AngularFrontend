@@ -35,32 +35,33 @@
         }
 
     #table {
-        background-color:whitesmoke;
-        border-color:black;
-        border-width:thick;
-        border-style:double;       
+        background-color: whitesmoke;
+        border-color: black;
+        border-width: thick;
+        border-style: double;
     }
 
     table {
-        background-color:whitesmoke;
-        border-color:black;
-        border-width:medium;
-        border-style:double;
-        
+        background-color: whitesmoke;
+        border-color: black;
+        border-width: medium;
+        border-style: double;
     }
+
     .textbox {
-    background: #CDC1C5;
-    color: black;
-    width: 200px;
-    padding: 6px 15px 6px 35px;
-    border-radius: 20px;
-    box-shadow: 0 1px 0 #ccc inset;
-    transition: 500ms all ease;
-    outline: 0;
-}
- .textbox:hover {
-    width: 270px;
-}
+        background: #CDC1C5;
+        color: black;
+        width: 200px;
+        padding: 6px 15px 6px 35px;
+        border-radius: 20px;
+        box-shadow: 0 1px 0 #ccc inset;
+        transition: 500ms all ease;
+        outline: 0;
+    }
+
+        .textbox:hover {
+            width: 270px;
+        }
 
 
     th {
@@ -68,127 +69,68 @@
     }
 
     .button {
-    
-    display: inline-block;
-    margin: 0 auto;
-    
-    -webkit-border-radius: 10px;
-    
-    -webkit-box-shadow: 
-        0px 3px rgba(128,128,128,1), /* gradient effects */
-        0px 4px rgba(118,118,118,1),
-        0px 5px rgba(108,108,108,1),
-        0px 6px rgba(98,98,98,1),
-        0px 7px rgba(88,88,88,1),
-        0px 8px rgba(78,78,78,1),
-        0px 14px 6px -1px rgba(128,128,128,1); /* shadow */
-    
-    -webkit-transition: -webkit-box-shadow .1s ease-in-out;
-} 
+        display: inline-block;
+        margin: 0 auto;
+        -webkit-border-radius: 10px;
+        -webkit-box-shadow: 0px 3px rgba(128,128,128,1), /* gradient effects */
+        0px 4px rgba(118,118,118,1), 0px 5px rgba(108,108,108,1), 0px 6px rgba(98,98,98,1), 0px 7px rgba(88,88,88,1), 0px 8px rgba(78,78,78,1), 0px 14px 6px -1px rgba(128,128,128,1); /* shadow */
+        -webkit-transition: -webkit-box-shadow .1s ease-in-out;
+    }
 
-.button span {
-    background-color: #E8E8E8;
-    
-    background-image: 
-        /* gloss gradient */
-        -webkit-gradient(
-            linear, 
-            left bottom, 
-            left top, 
-            color-stop(50%,rgba(255,255,255,0)), 
-            color-stop(50%,rgba(255,255,255,0.3)), 
-            color-stop(100%,rgba(255,255,255,0.2))),
-        
-        /* dark outside gradient */
-        -webkit-gradient(
-            linear, 
-            left top, 
-            right top, 
-            color-stop(0%,rgba(210,210,210,0.3)), 
-            color-stop(20%,rgba(210,210,210,0)), 
-            color-stop(80%,rgba(210,210,210,0)), 
-            color-stop(100%,rgba(210,210,210,0.3))),
-        
-        /* light inner gradient */
-        -webkit-gradient(
-            linear, 
-            left top, 
-            right top, 
-            color-stop(0%,rgba(255,255,255,0)), 
-            color-stop(20%,rgba(255,255,255,0.5)), 
-            color-stop(80%,rgba(255,255,255,0.5)), 
-            color-stop(100%,rgba(255,255,255,0))),        
-        
-        /* diagonal line pattern */
-        -webkit-gradient(
-            linear, 
-            0% 100%, 
-            100% 0%, 
-            color-stop(0%,rgba(255,255,255,0)), 
-            color-stop(40%,rgba(255,255,255,0)), 
-            color-stop(40%,#D2D2D1), 
-            color-stop(60%,#D2D2D1), 
-            color-stop(60%,rgba(255,255,255,0)), 
-            color-stop(100%,rgba(255,255,255,0)));
-    
-        -webkit-box-shadow:
-            0px -1px #fff, /* top highlight */
+        .button span {
+            background-color: #E8E8E8;
+            background-image:
+            /* gloss gradient */
+            -webkit-gradient( linear, left bottom, left top, color-stop(50%,rgba(255,255,255,0)), color-stop(50%,rgba(255,255,255,0.3)), color-stop(100%,rgba(255,255,255,0.2))),
+            /* dark outside gradient */
+            -webkit-gradient( linear, left top, right top, color-stop(0%,rgba(210,210,210,0.3)), color-stop(20%,rgba(210,210,210,0)), color-stop(80%,rgba(210,210,210,0)), color-stop(100%,rgba(210,210,210,0.3))),
+            /* light inner gradient */
+            -webkit-gradient( linear, left top, right top, color-stop(0%,rgba(255,255,255,0)), color-stop(20%,rgba(255,255,255,0.5)), color-stop(80%,rgba(255,255,255,0.5)), color-stop(100%,rgba(255,255,255,0))),
+            /* diagonal line pattern */
+            -webkit-gradient( linear, 0% 100%, 100% 0%, color-stop(0%,rgba(255,255,255,0)), color-stop(40%,rgba(255,255,255,0)), color-stop(40%,#D2D2D1), color-stop(60%,#D2D2D1), color-stop(60%,rgba(255,255,255,0)), color-stop(100%,rgba(255,255,255,0)));
+            -webkit-box-shadow: 0px -1px #fff, /* top highlight */
             0px 1px 1px #FFFFFF; /* bottom edge */
-    
-    -webkit-background-size: 100%, 100%, 100%, 4px 4px;
-    
-    -webkit-border-radius: 10px;
-    -webkit-transition: -webkit-transform .1s ease-in-out;
-    
-    display: inline-block;
-    padding: 10px 40px 10px 40px;
-    
-    color: #3A474D;
-    text-transform: uppercase;
-    font-family: 'TradeGothicLTStd-BdCn20','PT Sans Narrow';
-    font-weight: 700;
-    font-size: 32px;
-    
-    text-shadow: 0px 1px #fff, 0px -1px #262F33;
-}
-
-        .button span:hover {
-            color: #AEBF3B;
-            text-shadow: 0px -1px #97A63A;
-            cursor: pointer;
+            -webkit-background-size: 100%, 100%, 100%, 4px 4px;
+            -webkit-border-radius: 10px;
+            -webkit-transition: -webkit-transform .1s ease-in-out;
+            display: inline-block;
+            padding: 10px 40px 10px 40px;
+            color: #3A474D;
+            text-transform: uppercase;
+            font-family: 'TradeGothicLTStd-BdCn20','PT Sans Narrow';
+            font-weight: 700;
+            font-size: 32px;
+            text-shadow: 0px 1px #fff, 0px -1px #262F33;
         }
+
+            .button span:hover {
+                color: #AEBF3B;
+                text-shadow: 0px -1px #97A63A;
+                cursor: pointer;
+            }
 
         .button:active {
-            -webkit-box-shadow: 
-                0px 3px rgba(128,128,128,1),
-                0px 4px rgba(118,118,118,1),
-                0px 5px rgba(108,108,108,1),
-                0px 6px rgba(98,98,98,1),
-                0px 7px rgba(88,88,88,1),
-                0px 8px rgba(78,78,78,1),
-                0px 10px 2px 0px rgba(128,128,128,.6); /* shadow */
+            -webkit-box-shadow: 0px 3px rgba(128,128,128,1), 0px 4px rgba(118,118,118,1), 0px 5px rgba(108,108,108,1), 0px 6px rgba(98,98,98,1), 0px 7px rgba(88,88,88,1), 0px 8px rgba(78,78,78,1), 0px 10px 2px 0px rgba(128,128,128,.6); /* shadow */
         }
 
-        .button:active span{
-            -webkit-transform: translate(0, 5px); /* depth of button press */
-        }
+            .button:active span {
+                -webkit-transform: translate(0, 5px); /* depth of button press */
+            }
 
-    .button span:after {
-        content: ">";
-        display: block;
-        width: 10px;
-        height: 10px;
-    
-        position: absolute;
-        right: 14px;
-        top: 12px;    
-        
-        font-family: 'Cabin';
-        font-weight: 700;
-        color: #AEBF3B;
-        text-shadow: 0px 1px #fff, 0px -1px #97A63A;
-        font-size: 26px;
-    }
+        .button span:after {
+            content: ">";
+            display: block;
+            width: 10px;
+            height: 10px;
+            position: absolute;
+            right: 14px;
+            top: 12px;
+            font-family: 'Cabin';
+            font-weight: 700;
+            color: #AEBF3B;
+            text-shadow: 0px 1px #fff, 0px -1px #97A63A;
+            font-size: 26px;
+        }
 </style>
 
 
@@ -224,62 +166,62 @@
             </tr>
             <tr>
                 <th>Corporate_Name</th>
-                <td colspan="2"><input type="text" ng-model="Corporate_Name" value="" disabled class="textbox"/></td>
+                <td colspan="2"><input type="text" ng-model="Corporate_Name" value="" disabled class="textbox" id="rem1"/></td>
             </tr>
             <tr>
                 <th>Corporate_ShortName</th>
-                <td colspan="2"><input type="text" ng-model="Corporate_ShortName" value="" disabled class="textbox"/></td>
+                <td colspan="2"><input type="text" ng-model="Corporate_ShortName" value="" disabled class="textbox" id="rem2"/></td>
             </tr>
             <tr>
                 <th>Corporate_TradeName</th>
-                <td colspan="2"><input type="text" ng-model="Corporate_TradeName" value="" disabled class="textbox"/></td>
+                <td colspan="2"><input type="text" ng-model="Corporate_TradeName" value="" disabled class="textbox" id="rem3"/></td>
             </tr>
             <tr>
                 <th>Corporate_Address_Street</th>
-                <td colspan="2"><input type="text" ng-model="Corporate_Address_Street" value="" disabled class="textbox"/></td>
+                <td colspan="2"><input type="text" ng-model="Corporate_Address_Street" value="" disabled class="textbox" id="rem4"/></td>
             </tr>
             <tr>
                 <th>Corporate_Address_City</th>
-                <td colspan="2"><input type="text" ng-model="Corporate_Address_City" value="" disabled class="textbox"/></td>
+                <td colspan="2"><input type="text" ng-model="Corporate_Address_City" value="" disabled class="textbox" id="rem5"/></td>
             </tr>
             <tr>
                 <th>Corporate_Address_State</th>
-                <td colspan="2"><input type="text" ng-model="Corporate_Address_State" value="" disabled class="textbox"/></td>
+                <td colspan="2"><input type="text" ng-model="Corporate_Address_State" value="" disabled class="textbox" id="rem6"/></td>
             </tr>
             <tr>
                 <th>Corporate_Address_Zip</th>
-                <td colspan="2"><input type="text" ng-model="Corporate_Address_Zip" value="" disabled class="textbox"/></td>
+                <td colspan="2"><input type="text" ng-model="Corporate_Address_Zip" value="" disabled class="textbox" id="rem7"/></td>
             </tr>
             <tr>
                 <th>Corporate_Address_Country</th>
-                <td colspan="2"><input type="text" ng-model="Corporate_Address_Country" value="" disabled class="textbox"/></td>
+                <td colspan="2"><input type="text" ng-model="Corporate_Address_Country" value="" disabled class="textbox" id="rem8"/></td>
             </tr>
             <tr>
                 <th>Corporate_Phone_1</th>
-                <td colspan="2"><input type="text" ng-model="Corporate_Phone_1" value="" disabled class="textbox"/></td>
+                <td colspan="2"><input type="text" ng-model="Corporate_Phone_1" value="" disabled class="textbox" id="rem9"/></td>
             </tr>
             <tr>
                 <th>Corporate_Phone_2</th>
-                <td colspan="2"><input type="text" ng-model="Corporate_Phone_2" value="" disabled class="textbox"/></td>
+                <td colspan="2"><input type="text" ng-model="Corporate_Phone_2" value="" disabled class="textbox" id="rem10"/></td>
             </tr>
             <tr>
                 <th>Corporate_Phone_3</th>
-                <td colspan="2"><input type="text" ng-model="Corporate_Phone_3" value="" disabled class="textbox"/></td>
+                <td colspan="2"><input type="text" ng-model="Corporate_Phone_3" value="" disabled class="textbox" id="rem11"/></td>
             </tr>
             <tr>
                 <th>Corporate_ID</th>
-                <td colspan="2"><input type="text" ng-model="Corporate_ID" value="" disabled class="textbox"/></td>
+                <td colspan="2"><input type="text" ng-model="Corporate_ID" value="" disabled class="textbox" id="rem12"/></td>
             </tr>
             <tr>
                 <th>Site ID</th>
-               
+
                 <td ng-show="update" colspan="2" ng-click="showCheckboxes()">
                     <select class="textbox">
-                        <option >Select an option</option>
+                        <option>Select an option</option>
                     </select>
                     <br />
-                    <label for="one" class="listing" ng-repeat="data in Site_ID" ng-show="list">
-                        <input type="checkbox" id="one" />{{data}}
+                    <label for="one" class="listing" ng-repeat="data in RetrievedSites" ng-show="list">
+                        <input type="checkbox" ng-model="RetrievedSites[$index].isChecked" id="one" />{{data.siteId}}
                     </label>
                 </td>
                 <td ng-hide="update" colspan="2">
@@ -290,15 +232,15 @@
             <tr ng-hide="update">
                 <td><input type="submit" name="name" value="CREATE" class="button" ng-click="postClicked()" /></td>
                 <td><input type="submit" name="name" value="UPDATE" class="button" ng-click="updateClicked()" /></td>
-                <td><input type="submit" name="name" value="DELETE" class="button"ng-click="deleteAccount()" /></td>
+                <td><input type="submit" name="name" value="DELETE" class="button" ng-click="deleteAccount()" /></td>
             </tr>
             <tr ng-show="update">
                 <td><input type="submit" name="name" value="Post" class="button" ng-click="updateAccount()" /></td>
                 <td colspan="2"><input type="submit" name="name" value="Cancel" class="button" ng-click="reset()" /></td>
             </tr>
-        </table>      
+        </table>
     </div>
-    <div ng-show="post">      
+    <div ng-show="post">
         <table cellpadding="5" cellspacing="5" align="left" class="table table-bordered" id="table">
             <tr>
                 <th>Property Name</th>
@@ -307,66 +249,66 @@
             </tr>
             <tr>
                 <th>Account ID</th>
-                <td colspan="2"><input type="text" ng-model="id" value="" class="textbox"/></td>
+                <td colspan="2"><input type="text" ng-model="id" value="" class="textbox" /></td>
             </tr>
             <tr>
                 <th>Corporate_Name</th>
-                <td colspan="2"><input type="text" ng-model="Corporate_Name" value="" class="textbox"/></td>
+                <td colspan="2"><input type="text" ng-model="Corporate_Name" value="" class="textbox" /></td>
             </tr>
             <tr>
                 <th>Corporate_ShortName</th>
-                <td colspan="2"><input type="text" ng-model="Corporate_ShortName" value="" class="textbox"/></td>
+                <td colspan="2"><input type="text" ng-model="Corporate_ShortName" value="" class="textbox" /></td>
             </tr>
             <tr>
                 <th>Corporate_TradeName</th>
-                <td colspan="2"><input type="text" ng-model="Corporate_TradeName" value="" class="textbox"/></td>
+                <td colspan="2"><input type="text" ng-model="Corporate_TradeName" value="" class="textbox" /></td>
             </tr>
             <tr>
                 <th>Corporate_Address_Street</th>
-                <td colspan="2"><input type="text" ng-model="Corporate_Address_Street" value="" class="textbox"/></td>
+                <td colspan="2"><input type="text" ng-model="Corporate_Address_Street" value="" class="textbox" /></td>
             </tr>
             <tr>
                 <th>Corporate_Address_City</th>
-                <td colspan="2"><input type="text" ng-model="Corporate_Address_City" value="" class="textbox"/></td>
+                <td colspan="2"><input type="text" ng-model="Corporate_Address_City" value="" class="textbox" /></td>
             </tr>
             <tr>
                 <th>Corporate_Address_State</th>
-                <td colspan="2"><input type="text" ng-model="Corporate_Address_State" value="" class="textbox"/></td>
+                <td colspan="2"><input type="text" ng-model="Corporate_Address_State" value="" class="textbox" /></td>
             </tr>
             <tr>
                 <th>Corporate_Address_Zip</th>
-                <td colspan="2"><input type="text" ng-model="Corporate_Address_Zip" value="" class="textbox"/></td>
+                <td colspan="2"><input type="text" ng-model="Corporate_Address_Zip" value="" class="textbox" /></td>
             </tr>
             <tr>
                 <th>Corporate_Address_Country</th>
-                <td colspan="2"><input type="text" ng-model="Corporate_Address_Country" value="" class="textbox"/></td>
+                <td colspan="2"><input type="text" ng-model="Corporate_Address_Country" value="" class="textbox" /></td>
             </tr>
             <tr>
                 <th>Corporate_Phone_1</th>
-                <td colspan="2"><input type="text" ng-model="Corporate_Phone_1" value="" class="textbox"/></td>
+                <td colspan="2"><input type="text" ng-model="Corporate_Phone_1" value="" class="textbox" /></td>
             </tr>
             <tr>
                 <th>Corporate_Phone_2</th>
-                <td colspan="2"><input type="text" ng-model="Corporate_Phone_2" value="" class="textbox"/></td>
+                <td colspan="2"><input type="text" ng-model="Corporate_Phone_2" value="" class="textbox" /></td>
             </tr>
             <tr>
                 <th>Corporate_Phone_3</th>
-                <td colspan="2"><input type="text" ng-model="Corporate_Phone_3" value="" class="textbox"/></td>
+                <td colspan="2"><input type="text" ng-model="Corporate_Phone_3" value="" class="textbox" /></td>
             </tr>
             <tr>
                 <th>Corporate_ID</th>
-                <td colspan="2"><input type="text" ng-model="Corporate_ID" value="" class="textbox"/></td>
+                <td colspan="2"><input type="text" ng-model="Corporate_ID" value="" class="textbox" /></td>
             </tr>
             <tr>
                 <th>Site ID</th>
-                
-                <td  colspan="2">
-                    <select class="textbox">
-                        <option ng-click="showCheckboxes()">Select an option</option>
+
+                <td colspan="2">
+                    <select class="textbox"  ng-click="showCheckboxes()">
+                        <option>Select an option</option>
                     </select>
                     <br />
-                    <label for="one" class="listing" ng-repeat="data in Site_ID" ng-show="list">
-                        <input type="checkbox" id="one" />{{data}}
+                    <label for="one" class="listing" ng-repeat="data in RetrievedSites" ng-show="list">
+                        <input type="checkbox" ng-model="RetrievedSites[$index].isChecked" id="one" />{{data.siteId}}
                     </label>
                 </td>
             </tr>
