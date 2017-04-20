@@ -36,6 +36,7 @@ var SitesController = function (uriFactory, $scope, $location, $cookieStore, api
                    
                 });
             }, function () {
+                document.body.scrollTop = document.documentElement.scrollTop = 0;
                 ngToast.create({
                     className: 'success',
                     content: '<p>Login Successful</p>',
@@ -45,6 +46,7 @@ var SitesController = function (uriFactory, $scope, $location, $cookieStore, api
                 });
             });
         }, function () {
+            document.body.scrollTop = document.documentElement.scrollTop = 0;
             ngToast.create({
                 className: 'warning',
                 content: '<p>Oops!!! Something went wrong! please try again after sometime</p>',
@@ -53,6 +55,38 @@ var SitesController = function (uriFactory, $scope, $location, $cookieStore, api
                 dismissOnClick: true
             });
         });
+    }
+
+    $scope.findSystem = function (systems) {
+        console.log(systems);
+        for (var i = 0; i < systems.length; i++) {
+
+            var boolVal = false;
+            for (var j = 0; j < $scope.RetrievedSite.Systems.length; j++) {
+                var value = $scope.RetrievedSite.Systems;
+                console.log(value.length);
+                if (j == 1 || (j - 1) % 3 == 0) {
+                    if (value[j] == systems[i].id) {
+                        $scope.RetrievedSystems.push({
+                            systemId: value[j],
+                            isChecked: true
+                        });
+                        boolVal = false;
+                        break;
+                    }
+                }
+                
+                boolVal = true;
+            }
+            if (boolVal) {
+                $scope.RetrievedSystems.push({
+                    systemId: systems[i].id,
+                    isChecked: false
+                });
+            }
+        }
+        console.log($scope.RetrievedSystems);
+
     }
 
     $scope.postClicked = function () {
@@ -100,6 +134,7 @@ var SitesController = function (uriFactory, $scope, $location, $cookieStore, api
             });
 
         }, function () {
+            document.body.scrollTop = document.documentElement.scrollTop = 0;
             ngToast.create({
                 className: 'warning',
                 content: '<p>Oops!!! Something went wrong! please try again after sometime</p>',
@@ -123,6 +158,7 @@ var SitesController = function (uriFactory, $scope, $location, $cookieStore, api
             });
 
         }, function () {
+            document.body.scrollTop = document.documentElement.scrollTop = 0;
             ngToast.create({
                 className: 'warning',
                 content: '<p>Oops!!! Something went wrong! please try again after sometime</p>',
@@ -143,23 +179,9 @@ var SitesController = function (uriFactory, $scope, $location, $cookieStore, api
 
         $scope.RetrievedSystems = [];
         apiDispatcher.getAll(uriFactory.getAllSystems).then(function (response) {
-            angular.forEach(response.data, function (value, key) {
-                if (value.site_ID == $cookieStore.get('SiteId')) {
-                    $scope.RetrievedSystems.push({
-                        systemId: value.id,
-                        devices: value.Devices,
-                        isChecked: true
-                    });
-                }
-                else {
-                    $scope.RetrievedSystems.push({
-                        systemId: value.id,
-                        devices: value.Devices,
-                        isChecked: false
-                    });
-                }
-            });
+            $scope.findSystem(response.data);
         }, function () {
+            document.body.scrollTop = document.documentElement.scrollTop = 0;
             ngToast.create({
                 className: 'warning',
                 content: '<p>Oops!!! Something went wrong! please try again after sometime</p>',
@@ -243,6 +265,7 @@ var SitesController = function (uriFactory, $scope, $location, $cookieStore, api
             });
 
         }, function () {
+            document.body.scrollTop = document.documentElement.scrollTop = 0;
             ngToast.create({
                 className: 'warning',
                 content: '<p>Oops!!! Something went wrong! please try again after sometime</p>',
@@ -297,6 +320,7 @@ var SitesController = function (uriFactory, $scope, $location, $cookieStore, api
             systems: selected_Systems
         };
         apiDispatcher.postData(uriFactory.createSite, data).then(function (res) {
+            document.body.scrollTop = document.documentElement.scrollTop = 0;
             ngToast.create({
                 className: 'success',
                 content: '<p>Site Added Successfully</p>',
@@ -305,6 +329,7 @@ var SitesController = function (uriFactory, $scope, $location, $cookieStore, api
                 dismissOnClick: true
             });
         }, function () {
+            document.body.scrollTop = document.documentElement.scrollTop = 0;
             ngToast.create({
                 className: 'warning',
                 content: '<p>Site Adding Failed! Please try again later</p>',
@@ -344,6 +369,7 @@ var SitesController = function (uriFactory, $scope, $location, $cookieStore, api
             systems: selected_Systems
         };
         apiDispatcher.update(uriFactory.updateSite, data).then(function (res) {
+            document.body.scrollTop = document.documentElement.scrollTop = 0;
             ngToast.create({
                 className: 'success',
                 content: '<p>Site Updated Successfully</p>',
@@ -352,6 +378,7 @@ var SitesController = function (uriFactory, $scope, $location, $cookieStore, api
                 dismissOnClick: true
             });
         }, function () {
+            document.body.scrollTop = document.documentElement.scrollTop = 0;
             ngToast.create({
                 className: 'danger',
                 content: '<p>Oops!!! Update Failed! Change a few things and try again</p>',
@@ -363,6 +390,7 @@ var SitesController = function (uriFactory, $scope, $location, $cookieStore, api
     }
 
     $scope.deleteSite = function () {
+        document.body.scrollTop = document.documentElement.scrollTop = 0;
         apiDispatcher.deleteById(uriFactory.deleteSite + $cookieStore.get('SiteId')).then(function (res) {
             ngToast.create({
                 className: 'success',
@@ -372,6 +400,7 @@ var SitesController = function (uriFactory, $scope, $location, $cookieStore, api
                 dismissOnClick: true
             });
         }, function (res) {
+            document.body.scrollTop = document.documentElement.scrollTop = 0;
             ngToast.create({
                 className: 'danger',
                 content: '<p>Oops!!! Site cannot be deleted</p>',

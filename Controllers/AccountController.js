@@ -35,15 +35,17 @@ var AccountController = function (uriFactory, $scope, $location, $cookieStore, a
                   
                 });
             }, function () {
+                document.body.scrollTop = document.documentElement.scrollTop = 0;
                 ngToast.create({
-                    className: 'success',
-                    content: '<p>Login Successful</p>',
+                    className: 'warning',
+                    content: '<p>Oops!!! Something went wrong! please try again after sometime</p>',
                     dismissOnTimeout: true,
                     timeout: 4000,
                     dismissOnClick: true
                 });
             });
         }, function () {
+            document.body.scrollTop = document.documentElement.scrollTop = 0;
             ngToast.create({
                 className: 'warning',
                 content: '<p>Oops!!! Something went wrong! please try again after sometime</p>',
@@ -87,6 +89,7 @@ var AccountController = function (uriFactory, $scope, $location, $cookieStore, a
             });
 
         }, function () {
+            document.body.scrollTop = document.documentElement.scrollTop = 0;
             ngToast.create({
                 className: 'warning',
                 content: '<p>Oops!!! Something went wrong! please try again after sometime</p>',
@@ -101,7 +104,7 @@ var AccountController = function (uriFactory, $scope, $location, $cookieStore, a
     $scope.findSite = function (sites) {
         for(var i=0;i<sites.length;i++){
 
-        
+            var boolVal = false;
         for(var j=0;j<$scope.RetrievedAccount.Site_ID.length;j++) {
             var value = $scope.RetrievedAccount.Site_ID[j];
                
@@ -111,17 +114,17 @@ var AccountController = function (uriFactory, $scope, $location, $cookieStore, a
                         siteId: value,
                         isChecked: true
                     });
-                    
+                    boolVal = false;
+                    break;
                 }
-               
-                  
-                
-               
+                boolVal = true;
         }
-        $scope.RetrievedSites.push({
-            siteId: sites[i].id,
-            isChecked: false
-        });
+        if (boolVal) {
+            $scope.RetrievedSites.push({
+                siteId: sites[i].id,
+                isChecked: false
+            });
+        }
         }
         console.log(  $scope.RetrievedSites);
      
@@ -141,6 +144,7 @@ var AccountController = function (uriFactory, $scope, $location, $cookieStore, a
                
             
         }, function () {
+            document.body.scrollTop = document.documentElement.scrollTop = 0;
             ngToast.create({
                 className: 'warning',
                 content: '<p>Oops!!! Something went wrong! please try again after sometime</p>',
@@ -211,6 +215,7 @@ var AccountController = function (uriFactory, $scope, $location, $cookieStore, a
             });
 
         }, function () {
+            document.body.scrollTop = document.documentElement.scrollTop = 0;
             ngToast.create({
                 className: 'warning',
                 content: '<p>Oops!!! Something went wrong! please try again after sometime</p>',
@@ -258,14 +263,19 @@ var AccountController = function (uriFactory, $scope, $location, $cookieStore, a
             Site_ID: selected_Sites
         };
         apiDispatcher.postData(uriFactory.createAccount, data).then(function (res) {
+            //$("body").animate({ top: "0px"}, "fast");
+            document.body.scrollTop = document.documentElement.scrollTop = 0;
             ngToast.create({
                 className: 'success',
                 content: '<p>Account Added Successfully</p>',
                 dismissOnTimeout: true,
                 timeout: 2000,
-                dismissOnClick: true
+                dismissOnClick: true,
+                verticalPosition: 'bottom'
             });
         }, function () {
+            //$("body").animate({ top: "0px" }, "fast");
+            document.body.scrollTop = document.documentElement.scrollTop = 0;
             ngToast.create({
                 className: 'warning',
                 content: '<p>Account Adding Failed! Please try again later</p>',
@@ -301,6 +311,7 @@ var AccountController = function (uriFactory, $scope, $location, $cookieStore, a
             Site_ID: selected_Sites
         };
         apiDispatcher.update(uriFactory.updateAccount, data).then(function (res) {
+            document.body.scrollTop = document.documentElement.scrollTop = 0;
             ngToast.create({
                 className: 'success',
                 content: '<p>Account Updated Successfully</p>',
@@ -309,6 +320,7 @@ var AccountController = function (uriFactory, $scope, $location, $cookieStore, a
                 dismissOnClick: true
             });
         }, function () {
+            document.body.scrollTop = document.documentElement.scrollTop = 0;
             ngToast.create({
                 className: 'danger',
                 content: '<p>Oops!!! Update Failed! Change a few things and try again</p>',
@@ -321,6 +333,7 @@ var AccountController = function (uriFactory, $scope, $location, $cookieStore, a
 
     $scope.deleteAccount = function () {
         apiDispatcher.deleteById(uriFactory.deleteAccount + $cookieStore.get('AccountId')).then(function (res) {
+            document.body.scrollTop = document.documentElement.scrollTop = 0;
             ngToast.create({
                 className: 'success',
                 content: '<p>Account Deleted Successfully</p>',
@@ -329,6 +342,7 @@ var AccountController = function (uriFactory, $scope, $location, $cookieStore, a
                 dismissOnClick: true
             });
         }, function (res) {
+            document.body.scrollTop = document.documentElement.scrollTop = 0;
             ngToast.create({
                 className: 'danger',
                 content: '<p>Oops!!! Account cannot be deleted</p>',
@@ -343,6 +357,7 @@ var AccountController = function (uriFactory, $scope, $location, $cookieStore, a
         apiDispatcher.getAll(uriFactory.getAccountInfo).then(function (res) {
             
         }, function () {
+            document.body.scrollTop = document.documentElement.scrollTop = 0;
             ngToast.create({
                 className: 'warning',
                 content: '<p>Oops!!! Something went wrong! please try again after sometime</p>',
