@@ -45,18 +45,63 @@ var SystemsController = function (uriFactory, $scope, $location, $cookieStore, a
     }
 
     $scope.postClicked = function () {
+    
         $scope.post = true;
         $scope.System_id = "";
         $scope.System_Name = "";
         $scope.System_Location = "";
         $scope.Site_Id = "";
-        $scope.Account_Id = "";
+        $scope.Account_ID = "";
         $scope.Device_Identity = "";
+        $scope.RetrievedDevices = [];
+        $scope.RetrievedAccounts = [];
+        $scope.RetrievedSites = [];
+
         apiDispatcher.getAll(uriFactory.getAllDevices).then(function (response) {
             angular.forEach(response.data, function (value, key) {
 
                 $scope.RetrievedDevices.push({
-                    deviceId: value.DeviceId,
+                    deviceId: value.deviceId,
+                    isChecked: false
+                });
+
+            });
+
+        }, function () {
+            ngToast.create({
+                className: 'warning',
+                content: '<p>Oops!!! Something went wrong! please try again after sometime</p>',
+                dismissOnTimeout: true,
+                timeout: 4000,
+                dismissOnClick: true
+            });
+        });
+
+        apiDispatcher.getAll(uriFactory.getAllAccounts).then(function (response) {
+            angular.forEach(response.data, function (value, key) {
+
+                $scope.RetrievedAccounts.push({
+                    accId: value.id,
+                    isChecked: false
+                });
+
+            });
+
+        }, function () {
+            ngToast.create({
+                className: 'warning',
+                content: '<p>Oops!!! Something went wrong! please try again after sometime</p>',
+                dismissOnTimeout: true,
+                timeout: 4000,
+                dismissOnClick: true
+            });
+        });
+
+        apiDispatcher.getAll(uriFactory.getAllSites).then(function (response) {
+            angular.forEach(response.data, function (value, key) {
+
+                $scope.RetrievedSites.push({
+                    siteId: value.id,
                     isChecked: false
                 });
 
@@ -132,7 +177,7 @@ var SystemsController = function (uriFactory, $scope, $location, $cookieStore, a
 	      $scope.Site_Id = $scope.RetrievedSystem.Site_Id,
 	     $scope.Account_Id = $scope.RetrievedSystem.Account_Id,
 	     $scope.Device_Identity = $scope.RetrievedSystem.Device_Identity
-       
+        $scope.Device_Id = $scope.Device_Identity[0];
     }
 
     $scope.getSystemById = function () {
@@ -190,11 +235,11 @@ var SystemsController = function (uriFactory, $scope, $location, $cookieStore, a
             }
         })
         var data = {
-            id: $scope.id,
+            id: $scope.System_id,
             system_Name: $scope.System_Name,
             system_Location: $scope.System_Location,
-            site_Id: $scope.Site_Id,
-            account_Id: $scope.Account_Id,
+            site_Id: $scope.Site_Id.siteId,
+            account_Id: $scope.Account_ID.accId,
             devices: selected_Devices
         };
         apiDispatcher.postData(uriFactory.createSystem, data).then(function (res) {

@@ -191,7 +191,9 @@
                         </label>
                     </td>
                     <td ng-hide="update" colspan="2">
-                        <select ng-model="Device_Identity" ng-options="data for data in Device_Identity " colspan="2" class="textbox"></select>
+                        <select ng-model="Device_Id" ng-options="data for data in Device_Identity " colspan="2" class="textbox">
+                            <option>{{Device_Id}}</option>
+                        </select>
                     </td>
                 </tr>
                 <!--<td  ng-hide="update"><select ng-model="Device_Identity" ng-options="data for data in Device_Identity "></select></td>
@@ -227,7 +229,7 @@
                 </tr>
                 <tr>
                     <th>SYSTEM ID</th>
-                    <td colspan="2">{{System_id}}</td>
+                    <td colspan="2"><input type="text" ng-model="System_id" value="" class="textbox" /></td>
                 </tr>
                 <tr>
                     <th>SYSTEM NAME</th>
@@ -239,11 +241,21 @@
                 </tr>
                 <tr>
                     <th>SITE ID</th>
-                    <td colspan="2"><input type="text" ng-model="Site_Id" value="" class="textbox" /></td>
+                    <td colspan="2">
+                        <select class="textbox" ng-model="Site_Id" ng-options="data.siteId for data in RetrievedSites ">
+                            <option>Select an account</option>
+                        </select>
+
+                    </td>
                 </tr>
                 <tr>
                     <th>ACCOUNT ID</th>
-                    <td colspan="2"><input type="text" ng-model="Account_Id" value="" class="textbox" /></td>
+                    <td colspan="2">
+                        <select class="textbox" ng-model="Account_ID" ng-options="data.accId for data in RetrievedAccounts ">
+                            <option>Select an account</option>
+                        </select>
+
+                    </td>
                 </tr>
                 <tr>
                     <th>DEVICE ID</th>

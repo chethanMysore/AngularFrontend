@@ -6,12 +6,14 @@ var AccountController = function (uriFactory, $scope, $location, $cookieStore, a
     $scope.delete = false;
     $scope.list = false;
     $scope.getAllAccounts = function () {
-        $scope.Sites = {};
+      
        
         
         loginService.doLogin(uriFactory.getToken).then(function (res) {
             $scope.RetrievedData = [];
+
             apiDispatcher.getAll(uriFactory.getAllAccounts).then(function (res) {
+              
                 angular.forEach(res.data, function (value, key) {
                     $scope.RetrievedData.push({
                         id: value.id,
@@ -96,6 +98,35 @@ var AccountController = function (uriFactory, $scope, $location, $cookieStore, a
         
     }
 
+    $scope.findSite = function (sites) {
+        for(var i=0;i<sites.length;i++){
+
+        
+        for(var j=0;j<$scope.RetrievedAccount.Site_ID.length;j++) {
+            var value = $scope.RetrievedAccount.Site_ID[j];
+               
+               
+                if (value == sites[i].id) {
+                    $scope.RetrievedSites.push({
+                        siteId: value,
+                        isChecked: true
+                    });
+                    
+                }
+               
+                  
+                
+               
+        }
+        $scope.RetrievedSites.push({
+            siteId: sites[i].id,
+            isChecked: false
+        });
+        }
+        console.log(  $scope.RetrievedSites);
+     
+    }
+
     $scope.updateClicked = function () {
         $scope.update = true;
         for (var i = 1; i < 13; i++) {
@@ -105,20 +136,10 @@ var AccountController = function (uriFactory, $scope, $location, $cookieStore, a
 
         $scope.RetrievedSites = [];
         apiDispatcher.getAll(uriFactory.getAllSites).then(function (response) {
-            angular.forEach(response.data, function (value, key) {
-                if(value.account_ID == $cookieStore.get('AccountId')){
-                $scope.RetrievedSites.push({
-                    siteId: value.id,
-                    isChecked: true
-                });
-                }
-                else {
-                    $scope.RetrievedSites.push({
-                        siteId: value.id,
-                        isChecked: false
-                    });
-                }
-            });
+            
+            $scope.findSite(response.data);
+               
+            
         }, function () {
             ngToast.create({
                 className: 'warning',
@@ -141,9 +162,9 @@ var AccountController = function (uriFactory, $scope, $location, $cookieStore, a
     }
 
     $scope.showAccount = function (index) {
-        //$location.path('/Accounts');
+       
         $cookieStore.put('AccountId', $scope.RetrievedData[index].id);
-
+   
 
         $scope.RetrievedAccount = $scope.RetrievedData[index];
         $scope.id = $scope.RetrievedAccount.id;
@@ -161,6 +182,8 @@ var AccountController = function (uriFactory, $scope, $location, $cookieStore, a
 	    $scope.Corporate_Logo = $scope.RetrievedAccount.Corporate_Logo;
 	    $scope.Corporate_ID = $scope.RetrievedAccount.Corporate_ID;
 	    $scope.Site_ID = $scope.RetrievedAccount.Site_ID;
+	    $scope.selectedSite = $scope.RetrievedAccount.Site_ID[0];
+	    console.log($scope.RetrievedAccount.Site_ID[0]);
         //$scope.getAccountById();
     }
 

@@ -221,52 +221,62 @@
 
                 <tr>
                     <th>DeviceId :</th>
-                    <td colspan="2"><input type="text" ng-model="DeviceId" value="" /></td>
+                    <td colspan="2"><input type="text" ng-model="DeviceId" value="" class="textbox"/></td>
                 </tr>
 
                 <tr>
                     <th>DeviceKey :</th>
-                    <td colspan="2"><input type="text" ng-model="DeviceKey" value="" /></td>
+                    <td colspan="2"><input type="text" ng-model="DeviceKey" value="" class="textbox"/></td>
                 </tr>
                 <tr>
                     <th>IOTHubEndpoint :</th>
-                    <td colspan="2"><input type="text" ng-model="IOTHubEndpoint" value="" /></td>
+                    <td colspan="2"><input type="text" ng-model="IOTHubEndpoint" value="" class="textbox"/></td>
                 </tr>
                 <tr>
                     <th>SerialNumber :</th>
-                    <td colspan="2"><input type="text" ng-model="SerialNumber" value="" /></td>
+                    <td colspan="2"><input type="text" ng-model="SerialNumber" value="" class="textbox"/></td>
                 </tr>
                 <tr>
                     <th>MACAddress :</th>
-                    <td colspan="2"><input type="text" ng-model="MACAddress" value="" /></td>
+                    <td colspan="2"><input type="text" ng-model="MACAddress" value="" class="textbox"/></td>
                 </tr>
                 <tr>
                     <th>BLEUUID :</th>
-                    <td colspan="2"><input type="text" ng-model="BLEUUID" value="" /></td>
+                    <td colspan="2"><input type="text" ng-model="BLEUUID" value="" class="textbox"/></td>
                 </tr>
                 <tr>
                     <th>AccountID :</th>
-                    <td colspan="2"><input type="text" ng-model="AccountID" value="" /></td>
+                    <td colspan="2">
+                        <select class="textbox" ng-model="Account_ID" ng-options="data.accId for data in RetrievedAccounts ">
+                            <option>Select an account</option>
+                        </select>
+
+                    </td>
                 </tr>
                 <tr>
                     <th>SystemID :</th>
-                    <td colspan="2"><input type="text" ng-model="SystemID" value="" /></td>
+                    <td colspan="2">
+                        <select class="textbox" ng-model="System_ID" ng-options="data.systemId for data in RetrievedSystems ">
+                            <option>Select an account</option>
+                        </select>
+
+                    </td>
                 </tr>
                 <tr>
                     <th>ConfigurationStoreURL :</th>
-                    <td colspan="2"><input type="text" ng-model="ConfigurationStoreURL" value="" /></td>
+                    <td colspan="2"><input type="text" ng-model="ConfigurationStoreURL" value="" class="textbox"/></td>
                 </tr>
                 <tr>
                     <th>Lastupdatedconfiguration :</th>
-                    <td colspan="2"><input type="text" ng-model="Lastupdatedconfiguration" value="" /></td>
+                    <td colspan="2"><input type="text" ng-model="Lastupdatedconfiguration" value="" class="textbox"/></td>
                 </tr>
                 <tr>
                     <th>PSK :</th>
-                    <td colspan="2"><input type="text" ng-model="psk" value="" /></td>
+                    <td colspan="2"><input type="text" ng-model="psk" value="" class="textbox"/></td>
                 </tr>
                 <tr>
                     <th>DeviceFirmwareVersion :</th>
-                    <td colspan="2"><input type="text" ng-model="DeviceFirmwareVersion" value="" /></td>
+                    <td colspan="2"><input type="text" ng-model="DeviceFirmwareVersion" value="" class="textbox"/></td>
                 </tr>
                 <tr>
                     <td>

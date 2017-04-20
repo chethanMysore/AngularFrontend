@@ -30,7 +30,8 @@ var SitesController = function (uriFactory, $scope, $location, $cookieStore, api
                         Site_Image: value.site_Image,
                         Account_ID: value.account_ID,
                         Account_Name: value.account_Name,
-                        Site_LatLng: value.site_LatLng
+                        Site_LatLng: value.site_LatLng,
+                        Systems: value.systems
                     });
                    
                 });
@@ -75,6 +76,17 @@ var SitesController = function (uriFactory, $scope, $location, $cookieStore, api
         $scope.Account_ID = "";
         $scope.Account_Name = "";
         $scope.Site_LatLng = "";
+        $scope.Systems = [];
+        for (var i = 0; i < $scope.RetrievedSite.Systems.length; i++) {
+            if (i == 1) {
+                $scope.Systems.push($scope.RetrievedSite.Systems[i]);
+            }
+            else if ((i - 1) % 3 == 0) {
+                $scope.Systems.push($scope.RetrievedSite.Systems[i]);
+            }
+
+        }
+
 
         apiDispatcher.getAll(uriFactory.getAllAccounts).then(function (response) {
             angular.forEach(response.data, function (value, key) {
@@ -97,13 +109,14 @@ var SitesController = function (uriFactory, $scope, $location, $cookieStore, api
             });
         });
        
-    
+        
         apiDispatcher.getAll(uriFactory.getAllSystems).then(function (response) {
             angular.forEach(response.data, function (value, key) {
                
                 $scope.RetrievedSystems.push({
+                    systemName: value.system_Name,
                     systemId: value.id,
-                    devices: value.Devices,
+                    devices: value.device_Identity,
                     isChecked: false
                 });
             
@@ -189,7 +202,20 @@ var SitesController = function (uriFactory, $scope, $location, $cookieStore, api
         $scope.Account_ID = $scope.RetrievedSite.Account_ID;
         $scope.Account_Name = $scope.RetrievedSite.Account_Name;
         $scope.Site_LatLng = $scope.RetrievedSite.Site_LatLng;
-        //$scope.getAccountById();
+        $scope.Systems = [];
+        for (var i = 0; i < $scope.RetrievedSite.Systems.length; i++) {
+            if(i == 1){
+                $scope.Systems.push($scope.RetrievedSite.Systems[i]);
+            }
+            else if((i-1) % 3 == 0){
+                $scope.Systems.push($scope.RetrievedSite.Systems[i]);
+            }
+
+        }
+        console.log($scope.Systems);
+
+        
+        $scope.selectedSystem = $scope.Systems[0];
     }
 
     $scope.getSitetById = function () {
@@ -243,7 +269,9 @@ var SitesController = function (uriFactory, $scope, $location, $cookieStore, api
         var selected_Systems = [];
         angular.forEach($scope.RetrievedSystems, function (value, key) {
             if (value.isChecked) {
-                selected_Systems.push({ systemId: value.systemId, devices: value.devices });
+                selected_Systems.push(value.systemName);
+                selected_Systems.push(value.systemId);
+                selected_Systems.push(value.devices);
                 
             }
 
@@ -263,7 +291,7 @@ var SitesController = function (uriFactory, $scope, $location, $cookieStore, api
             site_Phone_2: $scope.Site_Phone_2,
             site_Phone_3: $scope.Site_Phone_3,
             site_Image: $scope.Site_Image,
-            account_ID: $scope.Account_ID,
+            account_ID: $scope.Account_ID.accountId,
             account_Name: $scope.Account_Name,
             site_LatLng: $scope.Site_LatLng,
             systems: selected_Systems

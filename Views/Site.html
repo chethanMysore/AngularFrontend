@@ -233,7 +233,9 @@
                         </label>
                     </td>
                     <td ng-hide="update" colspan="2">
-                        <select ng-model="System_ID" ng-options="data for data in System_ID " colspan="2" class="textbox"></select>
+                        <select ng-model="selectedSystem" ng-options="data for data in Systems " colspan="2" class="textbox">
+                            <option>{{selectedSystem}}</option>
+                        </select>
                     </td>
                 </tr>
 
@@ -306,13 +308,10 @@
                 <tr>
                     <th>Account_ID</th>
                     <td colspan="2">
-                        <select class="textbox" ng-click="showCheckboxes()">
-                            <option>{{Account_ID}}</option>
+                        <select class="textbox" ng-model="Account_ID" ng-options="data.accountId for data in RetrievedAccounts ">
+                            <option>Select an account</option>
                         </select>
-                        <br />
-                        <label for="one" class="listing" ng-repeat="data in RetrievedAccounts" ng-show="list">
-                            <label ng-click="Account_ID = data.accountId">{{data.accountId}}</label>
-                        </label>
+                 
                     </td>
                 </tr>
                 <tr>
@@ -328,11 +327,11 @@
 
                     <td colspan="2">
                         <select class="textbox" ng-click="showCheckboxes()">
-                            <option>Select an option</option>
+                            <option>Select the Systems</option>
                         </select>
                         <br />
                         <label for="one" class="listing" ng-repeat="data in RetrievedSystems" ng-show="list">
-                            <input type="checkbox" ng-model="RetrievedSystems[$index].isChecked" id="one" />{{data.systemId}}
+                            <input type="checkbox" ng-model="RetrievedSystems[$index].isChecked" id="one" />{{data.systemName}}
                         </label>
                     </td>
                 </tr>

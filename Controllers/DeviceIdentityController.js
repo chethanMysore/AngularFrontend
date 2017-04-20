@@ -56,12 +56,54 @@ var DeviceIdentityController = function (uriFactory, $scope, $location, $cookieS
         $scope.SerialNumber = "";
         $scope.MACAddress = "";
         $scope.BLEUUID = "";
-        $scope.AccountID = "";
-        $scope.SystemID = "";
+        $scope.Account_ID = "";
+        $scope.System_ID = "";
         $scope.ConfigurationStoreURL = "";
         $scope.Lastupdatedconfiguration = "";
         $scope.psk = "";
         $scope.DeviceFirmwareVersion = "";
+        $scope.RetrievedSystems = [];
+        $scope.RetrievedAccounts = [];
+
+        apiDispatcher.getAll(uriFactory.getAllAccounts).then(function (response) {
+            angular.forEach(response.data, function (value, key) {
+
+                $scope.RetrievedAccounts.push({
+                    accId: value.id,
+                    isChecked: false
+                });
+
+            });
+
+        }, function () {
+            ngToast.create({
+                className: 'warning',
+                content: '<p>Oops!!! Something went wrong! please try again after sometime</p>',
+                dismissOnTimeout: true,
+                timeout: 4000,
+                dismissOnClick: true
+            });
+        });
+
+        apiDispatcher.getAll(uriFactory.getAllSystems).then(function (response) {
+            angular.forEach(response.data, function (value, key) {
+
+                $scope.RetrievedSystems.push({
+                    systemId: value.id,
+                    isChecked: false
+                });
+
+            });
+
+        }, function () {
+            ngToast.create({
+                className: 'warning',
+                content: '<p>Oops!!! Something went wrong! please try again after sometime</p>',
+                dismissOnTimeout: true,
+                timeout: 4000,
+                dismissOnClick: true
+            });
+        });
     }
 
     $scope.updateClicked = function () {
@@ -143,11 +185,11 @@ var DeviceIdentityController = function (uriFactory, $scope, $location, $cookieS
             deviceId: $scope.DeviceId,
             deviceKey: $scope.DeviceKey,
             iotHubEndpoint: $scope.IOTHubEndpoint,
-            serialNumber: $scope.SerialNumber,
+            serialNumber: $scope.DeviceId,
             macAddress: $scope.MACAddress,
             bleuuid: $scope.BLEUUID,
-            accountID: $scope.AccountID,
-            systemID: $scope.SystemID,
+            accountID: $scope.Account_ID.accId,
+            systemID: $scope.System_ID.systemId,
             configurationStoreUrl: $scope.ConfigurationStoreURL,
             lastupdatedconfiguration: $scope.Lastupdatedconfiguration,
             deviceFirmwareVersion: $scope.DeviceFirmwareVersion,

@@ -225,7 +225,9 @@
                         </label>
                     </td>
                     <td ng-hide="update" colspan="2">
-                        <select ng-model="Site_ID" ng-options="data for data in Site_ID " colspan="2" class="textbox"></select>
+                        <select ng-model="selectedSite" ng-options="data for data in Site_ID" colspan="2" class="textbox" >
+                            <option>{{selectedSite}}</option>
+                        </select>
                     </td>
                 </tr>
 
